@@ -24,7 +24,7 @@ const excludedFromLoopImagesIndexes = [3, 4];
 let classList: string[] = [];
 let currentImageIndex = 0;
 let isPaused = false;
-let isMobile = true;
+let isMobile = window.innerWidth < SCREEN_BREAKPOINT;
 let dots: NodeListOf<HTMLSpanElement> | [] = [];
 let isMouseMove = false;
 let isLinkButtonHovered = false;
@@ -77,6 +77,10 @@ const drawImage = (
   container: HTMLDivElement | null
 ): void => {
   if (!img || !container) {
+    console.error('No image container provided', {
+      container,
+      img,
+    });
     return;
   }
 
@@ -196,8 +200,6 @@ const handleMouseOverButton = (e: MouseEvent) => {
   const imageIndexAttr = Number(target?.getAttribute('data-image-index'));
   currentImageIndex = imageIndexAttr;
 
-  console.log('ODJE', imageIndexAttr);
-
   isLinkButtonHovered = excludedFromLoopImagesIndexes.includes(imageIndexAttr);
 
   if (isMouseMove) {
@@ -240,7 +242,6 @@ export const initHeroSection = (
   el: HTMLDivElement
 ): (() => ReturnType<typeof clearInterval>) | void => {
   const testEL = el ? el : imageContainer;
-  console.log('INIT SECTION', testEL, imageContainer);
   if (!testEL || imageContainer) {
     return;
   }
@@ -251,7 +252,6 @@ export const initHeroSection = (
 
   drawImage(images[currentImageIndex].value, testEL);
 
-  console.log('here');
   initButtonListeners();
 
   const interval: ReturnType<typeof setInterval> = setInterval(
