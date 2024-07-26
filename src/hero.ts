@@ -18,8 +18,6 @@ import {
 import { getRandomAnimationDelayValue } from './utils/commonUtils';
 
 let imageContainer = document.querySelector<HTMLDivElement>('#image-container');
-const buttons: NodeListOf<HTMLButtonElement> =
-  document.querySelectorAll('.hero-js-button');
 
 const staticDots = '00000000000000000000000000';
 const excludedFromLoopImagesIndexes = [3, 4];
@@ -198,6 +196,8 @@ const handleMouseOverButton = (e: MouseEvent) => {
   const imageIndexAttr = Number(target?.getAttribute('data-image-index'));
   currentImageIndex = imageIndexAttr;
 
+  console.log('ODJE', imageIndexAttr);
+
   isLinkButtonHovered = excludedFromLoopImagesIndexes.includes(imageIndexAttr);
 
   if (isMouseMove) {
@@ -216,6 +216,9 @@ const hanldeMouseLeaveButton = () => {
 };
 
 const initButtonListeners = () => {
+  const buttons: NodeListOf<HTMLButtonElement> =
+    document.querySelectorAll('.hero-js-button');
+
   if (buttons?.length) {
     buttons.forEach((button: HTMLButtonElement) => {
       button?.addEventListener('mouseenter', (e) => handleMouseOverButton(e));
@@ -248,6 +251,7 @@ export const initHeroSection = (
 
   drawImage(images[currentImageIndex].value, testEL);
 
+  console.log('here');
   initButtonListeners();
 
   const interval: ReturnType<typeof setInterval> = setInterval(
