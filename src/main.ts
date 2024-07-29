@@ -9,7 +9,7 @@ document.querySelector('#js-hero-section')!.innerHTML = `
         </h2>
         <p class="hero-subtitle">Calculate your stamp duty today!</p>
         <div id="image-container" class="image-container"></div>
-        <div class="flex">
+        <div class="hero-flex">
           <a
             href="https://partners.calm.network/compass/quotes/services/landTaxCalculation?calmPartnerIntegrationOptions=eyJtb2RlIjoic3RhbmRhbG9uZSIsIm1ldGEiOnsicmVmZXJyZXIiOiJDb21wYXNzIEdhdGV3YXkifX0="
             target="_blank"
@@ -38,7 +38,7 @@ document.querySelector('#js-hero-section')!.innerHTML = `
               fill="#E7ECEA"
             />
           </svg>
-          <span>Higher chance for approved mortgage</span>
+          <span>Satisfy your self-assessment obligation to HMRC</span>
         </button>
         <button class="hero-js-button hero-js-copy" data-image-index="1">
           <svg

@@ -192,6 +192,7 @@
   position: relative;
   background-color: #414343;
   margin-top: 55px;
+  padding-bottom: 55px;
 }
 
 .hero-subtitle {
@@ -207,7 +208,7 @@
   color: #e7ecea;
 }
 
-.flex {
+.hero-flex {
   box-sizing: border-box;
   margin-top: 24px;
   margin-bottom: 32px;
@@ -261,7 +262,7 @@
     animation-fill-mode: forwards;
   }
 
-  .flex {
+  .hero-flex {
     padding: 0;
   }
 
@@ -289,6 +290,10 @@
     border: none;
     outline: none;
     transition: all 200ms ease-in;
+  }
+
+  .hero-section {
+    padding-bottom: 0px;
   }
 
   .hero-section-container {
