@@ -11,7 +11,7 @@ document.querySelector('#js-hero-section')!.innerHTML = `
         <div id="image-container" class="image-container"></div>
         <div class="hero-flex">
           <a
-            href="https://partners.calm.network/compass/quotes/services/landTaxCalculation?calmPartnerIntegrationOptions=eyJtb2RlIjoic3RhbmRhbG9uZSIsIm1ldGEiOnsicmVmZXJyZXIiOiJDb21wYXNzIEdhdGV3YXkifX0="
+            href="http://compass.tech/get-a-quote"
             target="_blank"
             class="hero-button hero-button-secondary hero-js-button"
             data-image-index="3"
