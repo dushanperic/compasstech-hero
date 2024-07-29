@@ -1,31 +1,31 @@
 (function () {
   const t = document.createElement('link').relList;
   if (t && t.supports && t.supports('modulepreload')) return;
-  for (const s of document.querySelectorAll('link[rel="modulepreload"]')) a(s);
-  new MutationObserver((s) => {
-    for (const o of s)
+  for (const n of document.querySelectorAll('link[rel="modulepreload"]')) a(n);
+  new MutationObserver((n) => {
+    for (const o of n)
       if (o.type === 'childList')
         for (const r of o.addedNodes)
           r.tagName === 'LINK' && r.rel === 'modulepreload' && a(r);
   }).observe(document, { childList: !0, subtree: !0 });
-  function n(s) {
+  function s(n) {
     const o = {};
     return (
-      s.integrity && (o.integrity = s.integrity),
-      s.referrerPolicy && (o.referrerPolicy = s.referrerPolicy),
-      s.crossOrigin === 'use-credentials'
+      n.integrity && (o.integrity = n.integrity),
+      n.referrerPolicy && (o.referrerPolicy = n.referrerPolicy),
+      n.crossOrigin === 'use-credentials'
         ? (o.credentials = 'include')
-        : s.crossOrigin === 'anonymous'
+        : n.crossOrigin === 'anonymous'
         ? (o.credentials = 'omit')
         : (o.credentials = 'same-origin'),
       o
     );
   }
-  function a(s) {
-    if (s.ep) return;
-    s.ep = !0;
-    const o = n(s);
-    fetch(s.href, o);
+  function a(n) {
+    if (n.ep) return;
+    n.ep = !0;
+    const o = s(n);
+    fetch(n.href, o);
   }
 })();
 const H = [
@@ -110,17 +110,17 @@ const H = [
         '0000001111111111111111111000000',
         '0000001111111111111111111000000',
         '0000001111111111111111111000000',
-        '0000001111001111111000111000000',
-        '0000001110000111110001111000000',
-        '0000001110000111100011111000000',
-        '0000001111001111000111111000000',
-        '0000001111111110001111111000000',
-        '0000001111111100011111111000000',
-        '0000001111111000111111111000000',
-        '0000001111110001111001111000000',
-        '0000001111100011110000111000000',
-        '0000001111000111110000111000000',
-        '0000001110001111111001111000000',
+        '0000001111221111111222111000000',
+        '0000001112222111112221111000000',
+        '0000001112222111122211111000000',
+        '0000001111221111222111111000000',
+        '0000001111111112221111111000000',
+        '0000001111111122211111111000000',
+        '0000001111111222111111111000000',
+        '0000001111112221111221111000000',
+        '0000001111122211112222111000000',
+        '0000001111222111112222111000000',
+        '0000001112221111111221111000000',
         '0000000111111111111111110000000',
         '0000000111111111111111110000000',
         '0000000011111111111111100000000',
@@ -143,24 +143,24 @@ const H = [
         '0000000000000000000000000000000',
         '0000000000000000000000000000000',
         '0000000222222222222222220000000',
-        '0000000212111111111222220000000',
         '0000000222222222222222220000000',
-        '0000000212111111122222220000000',
         '0000000222222222222222220000000',
-        '0000000212111111111122220000000',
+        '0000000212111111111112220000000',
         '0000000222222222222222220000000',
-        '0000000211111111111111220000000',
+        '0000000212111111111112220000000',
         '0000000222222222222222220000000',
-        '0000000211111111111111220000000',
+        '0000000212111111111112220000000',
         '0000000222222222222222220000000',
-        '0000000211111111111111220000000',
+        '0000000212111111111112220000000',
         '0000000222222222222222220000000',
-        '0000000211111111111111220000000',
+        '0000000212111111111112220000000',
         '0000000222222222222222220000000',
-        '0000000211111122222222220000000',
-        '0000000222222222211111120000000',
+        '0000000212111111111112220000000',
         '0000000222222222222222220000000',
-        '0000000222222222211111120000000',
+        '0000000222222222222221220000000',
+        '0000000222222222222212220000000',
+        '0000000222222222212122220000000',
+        '0000000222222222221222220000000',
         '0000000222222222222222220000000',
         '0000000000000000000000000000000',
         '0000000000000000000000000000000',
@@ -212,13 +212,13 @@ const H = [
     SECONDARY_OUT: 'secondaryAnimationOut',
     DEFAULT_IN: 'defaultAnimationIn',
   },
-  v = { PRIMARY: 'primary', SECONDARY: 'secondary' },
+  p = { PRIMARY: 'primary', SECONDARY: 'secondary' },
   u = {
     PRIMARY: 'primary-bg',
     SECONDARY: 'secondary-bg',
     DEFAULT: 'default-bg',
   },
-  f = { PRIMARY: '1', SECONDARY: '2', DEFAULT: '0' },
+  h = { PRIMARY: '1', SECONDARY: '2', DEFAULT: '0' },
   j = 3500,
   U = 0,
   M = 500,
@@ -230,17 +230,17 @@ const H = [
     Object.values(u).forEach((t) => e.classList.remove(t));
   },
   O = (e, t) => (!e || !t ? !1 : e.classList.contains(t)),
-  h = (e, t) => t.forEach((n) => e.classList.add(n)),
+  f = (e, t) => t.forEach((s) => e.classList.add(s)),
   F = (e, t) => Math.floor(Math.random() * (t - e + 1) + e),
   R = () => `${F(U, M)}ms`;
 let m = document.querySelector('#image-container');
 const q = '00000000000000000000000000',
   N = [3, 4];
-let l = [],
-  c = 0,
-  E = !1,
+let c = [],
+  l = 0,
+  v = !1,
   A = window.innerWidth < T,
-  p = [],
+  E = [],
   w = !1,
   I = H;
 const B = I.map((e) => ({ ...e, value: e.value.map((t) => q + t) })),
@@ -248,111 +248,111 @@ const B = I.map((e) => ({ ...e, value: e.value.map((t) => q + t) })),
   k = (e) => {
     x(e),
       _(e),
-      I.forEach((t, n) => {
-        e.classList.remove(String(n));
+      I.forEach((t, s) => {
+        e.classList.remove(String(s));
       });
   },
   X = (e) => {
     switch (e) {
-      case v.PRIMARY:
+      case p.PRIMARY:
         return [u.PRIMARY, d.PRIMARY_OUT];
-      case v.SECONDARY:
+      case p.SECONDARY:
         return [u.SECONDARY, d.SECONDARY_OUT];
       default:
         return null;
     }
   },
-  D = (e, t) => {
+  C = (e, t) => {
     x(e), _(e);
-    const n = X(t);
-    n && ((e.style.animationDelay = R()), h(e, n));
+    const s = X(t);
+    s && ((e.style.animationDelay = R()), f(e, s));
   },
   P = (e, t) => {
     if (!e || !t) {
       console.error('No image container provided', { container: t, img: e });
       return;
     }
-    e.forEach((n) => {
+    e.forEach((s) => {
       const a = document.createElement('div');
-      h(a, ['row']),
-        n.split('').map((s) => {
+      f(a, ['row']),
+        s.split('').map((n) => {
           const o = document.createElement('span');
-          switch ((h(o, ['dot', s]), (o.style.animationDelay = R()), s)) {
-            case f.PRIMARY:
-              l = [u.DEFAULT, d.PRIMARY_IN];
+          switch ((f(o, ['dot', n]), (o.style.animationDelay = R()), n)) {
+            case h.PRIMARY:
+              c = [u.DEFAULT, d.PRIMARY_IN];
               break;
-            case f.SECONDARY:
-              l = [u.DEFAULT, d.SECONDARY_IN];
+            case h.SECONDARY:
+              c = [u.DEFAULT, d.SECONDARY_IN];
               break;
             default:
-              l = [u.DEFAULT, d.DEFAULT_IN];
+              c = [u.DEFAULT, d.DEFAULT_IN];
               break;
           }
-          h(o, l), a.append(o);
+          f(o, c), a.append(o);
         }),
         t.append(a);
     }),
-      (p = document.querySelectorAll('.dot'));
+      (E = document.querySelectorAll('.dot'));
   },
   b = (e) => {
-    if (E) return null;
-    N.includes(c) && !w && (c = 0);
+    if (v) return null;
+    N.includes(l) && !w && (l = 0);
     const t = L();
-    let n = [];
-    const a = e || t[c].value;
-    p = document.querySelectorAll('.dot');
-    const s = a.reduce((r, g) => (r += g.length), 0);
+    let s = [];
+    const a = e || t[l].value;
+    E = document.querySelectorAll('.dot');
+    const n = a.reduce((r, g) => (r += g.length), 0);
     if (
-      (a.forEach((r) => n.push(...r)),
-      p.length !== s ||
-        (n.forEach((r, g) => {
-          const i = p[g];
-          O(i, f.PRIMARY) && D(i, v.PRIMARY),
-            O(i, f.SECONDARY) && D(i, v.SECONDARY);
+      (a.forEach((r) => s.push(...r)),
+      E.length !== n ||
+        (s.forEach((r, g) => {
+          const i = E[g];
+          O(i, h.PRIMARY) && C(i, p.PRIMARY),
+            O(i, h.SECONDARY) && C(i, p.SECONDARY);
         }),
-        E))
+        v))
     )
       return null;
     const o = setTimeout(() => {
-      n.forEach((r, g) => {
-        const i = p[g];
+      s.forEach((r, g) => {
+        const i = E[g];
         switch (((i.style.animationDelay = R()), k(i), r)) {
-          case f.PRIMARY:
-            (l = [u.DEFAULT, d.PRIMARY_IN]), h(i, l);
+          case h.PRIMARY:
+            (c = [u.DEFAULT, d.PRIMARY_IN]), f(i, c);
             break;
-          case f.SECONDARY:
-            (l = [u.DEFAULT, d.SECONDARY_IN]), h(i, l);
+          case h.SECONDARY:
+            (c = [u.DEFAULT, d.SECONDARY_IN]), f(i, c);
             break;
           default:
-            (l = [u.DEFAULT, d.DEFAULT_IN]), h(i, l);
+            (c = [u.DEFAULT, d.DEFAULT_IN]), f(i, c);
         }
         i.classList.add(r);
       });
     }, M);
-    return J(), c < I.length - 1 ? c++ : (c = 0), () => clearTimeout(o);
+    return J(), l < I.length - 1 ? l++ : (l = 0), () => clearTimeout(o);
   },
-  Y = (e) => {
+  D = (e) => {
     const t = e.target,
-      n = Number(t == null ? void 0 : t.getAttribute('data-image-index'));
-    (c = n), (w = N.includes(n));
+      s = Number(t == null ? void 0 : t.getAttribute('data-image-index'));
+    (l = s), (w = N.includes(s));
     const a = L();
-    b(a[c].value), (E = !0);
+    b(a[l].value), (v = !0);
   },
-  C = () => {
-    (E = !1), (w = !1);
+  Y = () => {
+    (v = !1), (w = !1);
   },
   Z = () => {
     const e = document.querySelectorAll('.hero-js-button');
     if (e != null && e.length)
       return (
         e.forEach((t) => {
-          t == null || t.addEventListener('mouseenter', (n) => Y(n)),
-            t == null || t.addEventListener('mouseleave', C);
+          t == null || t.addEventListener('mouseenter', (s) => D(s)),
+            t == null || t.addEventListener('mouseleave', Y);
         }),
         () => {
           e.forEach((t) => {
-            t == null || t.removeEventListener('mouseenter', (n) => Y(n)),
-              t == null || t.removeEventListener('mouseleave', C);
+            t == null || t.removeEventListener('mouseenter', (s) => D(s)),
+              t == null || t.removeEventListener('mouseleave', Y);
           });
         }
       );
@@ -361,8 +361,8 @@ const B = I.map((e) => ({ ...e, value: e.value.map((t) => q + t) })),
     const t = e || m;
     if (!t || m) return;
     t.innerHTML = '';
-    const n = L();
-    P(n[c].value, t), Z();
+    const s = L();
+    P(s[l].value, t), Z();
     const a = setInterval(() => b(), j);
     return (
       m || (m = document.querySelector('#image-container')),
@@ -371,7 +371,7 @@ const B = I.map((e) => ({ ...e, value: e.value.map((t) => q + t) })),
   },
   G = () => {
     const e = L();
-    m && ((m.innerHTML = ''), P(e[c].value, m));
+    m && ((m.innerHTML = ''), P(e[l].value, m));
   },
   y = () => {
     if (window.innerWidth <= T) {
@@ -384,13 +384,13 @@ const B = I.map((e) => ({ ...e, value: e.value.map((t) => q + t) })),
     G();
   },
   J = () => {
-    const e = document.querySelector(`[data-image-index="${c}"]`);
+    const e = document.querySelector(`[data-image-index="${l}"]`);
     document.querySelectorAll('.hero-js-button').forEach((a) => {
       a.classList.remove('hero-js-copy-highlighted');
     });
-    const n = e == null ? void 0 : e.getAttribute('data-image-index');
-    n &&
-      (N.includes(Number(n)) ||
+    const s = e == null ? void 0 : e.getAttribute('data-image-index');
+    s &&
+      (N.includes(Number(s)) ||
         e == null ||
         e.classList.add('hero-js-copy-highlighted'));
   };
@@ -412,7 +412,7 @@ document.querySelector('#js-hero-section').innerHTML = `
         </h2>
         <p class="hero-subtitle">Calculate your stamp duty today!</p>
         <div id="image-container" class="image-container"></div>
-        <div class="flex">
+        <div class="hero-flex">
           <a
             href="https://partners.calm.network/compass/quotes/services/landTaxCalculation?calmPartnerIntegrationOptions=eyJtb2RlIjoic3RhbmRhbG9uZSIsIm1ldGEiOnsicmVmZXJyZXIiOiJDb21wYXNzIEdhdGV3YXkifX0="
             target="_blank"
@@ -441,7 +441,7 @@ document.querySelector('#js-hero-section').innerHTML = `
               fill="#E7ECEA"
             />
           </svg>
-          <span>Higher chance for approved mortgage</span>
+          <span>Satisfy your self-assessment obligation to HMRC</span>
         </button>
         <button class="hero-js-button hero-js-copy" data-image-index="1">
           <svg
