@@ -212,7 +212,7 @@ const H = [
     SECONDARY_OUT: 'secondaryAnimationOut',
     DEFAULT_IN: 'defaultAnimationIn',
   },
-  E = { PRIMARY: 'primary', SECONDARY: 'secondary' },
+  v = { PRIMARY: 'primary', SECONDARY: 'secondary' },
   u = {
     PRIMARY: 'primary-bg',
     SECONDARY: 'secondary-bg',
@@ -221,7 +221,7 @@ const H = [
   h = { PRIMARY: '1', SECONDARY: '2', DEFAULT: '0' },
   j = 3500,
   U = 0,
-  Y = 500,
+  M = 500,
   T = 768,
   x = (e) => {
     Object.values(d).forEach((t) => e.classList.remove(t));
@@ -232,7 +232,7 @@ const H = [
   O = (e, t) => (!e || !t ? !1 : e.classList.contains(t)),
   f = (e, t) => t.forEach((s) => e.classList.add(s)),
   F = (e, t) => Math.floor(Math.random() * (t - e + 1) + e),
-  R = () => `${F(U, Y)}ms`;
+  R = () => `${F(U, M)}ms`;
 let m = document.querySelector('#image-container');
 const q = '00000000000000000000000000',
   N = [3, 4];
@@ -240,7 +240,7 @@ let c = [],
   l = 0,
   p = !1,
   A = window.innerWidth < T,
-  v = [],
+  E = [],
   w = !1,
   I = H;
 const B = I.map((e) => ({ ...e, value: e.value.map((t) => q + t) })),
@@ -252,19 +252,19 @@ const B = I.map((e) => ({ ...e, value: e.value.map((t) => q + t) })),
         e.classList.remove(String(s));
       });
   },
-  z = (e) => {
+  X = (e) => {
     switch (e) {
-      case E.PRIMARY:
+      case v.PRIMARY:
         return [u.PRIMARY, d.PRIMARY_OUT];
-      case E.SECONDARY:
+      case v.SECONDARY:
         return [u.SECONDARY, d.SECONDARY_OUT];
       default:
         return null;
     }
   },
-  C = (e, t) => {
+  D = (e, t) => {
     x(e), _(e);
-    const s = z(t);
+    const s = X(t);
     s && ((e.style.animationDelay = R()), f(e, s));
   },
   P = (e, t) => {
@@ -292,7 +292,7 @@ const B = I.map((e) => ({ ...e, value: e.value.map((t) => q + t) })),
         }),
         t.append(a);
     }),
-      (v = document.querySelectorAll('.dot'));
+      (E = document.querySelectorAll('.dot'));
   },
   b = (e) => {
     if (p) return null;
@@ -300,22 +300,22 @@ const B = I.map((e) => ({ ...e, value: e.value.map((t) => q + t) })),
     const t = L();
     let s = [];
     const a = e || t[l].value;
-    v = document.querySelectorAll('.dot');
+    E = document.querySelectorAll('.dot');
     const n = a.reduce((r, g) => (r += g.length), 0);
     if (
       (a.forEach((r) => s.push(...r)),
-      v.length !== n ||
+      E.length !== n ||
         (s.forEach((r, g) => {
-          const i = v[g];
-          O(i, h.PRIMARY) && C(i, E.PRIMARY),
-            O(i, h.SECONDARY) && C(i, E.SECONDARY);
+          const i = E[g];
+          O(i, h.PRIMARY) && D(i, v.PRIMARY),
+            O(i, h.SECONDARY) && D(i, v.SECONDARY);
         }),
         p))
     )
       return null;
     const o = setTimeout(() => {
       s.forEach((r, g) => {
-        const i = v[g];
+        const i = E[g];
         switch (((i.style.animationDelay = R()), k(i), r)) {
           case h.PRIMARY:
             (c = [u.DEFAULT, d.PRIMARY_IN]), f(i, c);
@@ -328,48 +328,48 @@ const B = I.map((e) => ({ ...e, value: e.value.map((t) => q + t) })),
         }
         i.classList.add(r);
       });
-    }, Y);
+    }, M);
     return V(), l < I.length - 1 ? l++ : (l = 0), () => clearTimeout(o);
   },
-  D = (e) => {
+  C = (e) => {
     const t = e.target,
       s = Number(t == null ? void 0 : t.getAttribute('data-image-index'));
     (l = s), (w = N.includes(s));
     const a = L();
     b(a[l].value), (p = !0);
   },
-  M = () => {
+  Y = () => {
     (p = !1), (w = !1);
   },
-  K = () => {
+  Z = () => {
     const e = document.querySelectorAll('.hero-js-button');
     if (e != null && e.length)
       return (
         e.forEach((t) => {
-          t == null || t.addEventListener('mouseenter', (s) => D(s)),
-            t == null || t.addEventListener('mouseleave', M);
+          t == null || t.addEventListener('mouseenter', (s) => C(s)),
+            t == null || t.addEventListener('mouseleave', Y);
         }),
         () => {
           e.forEach((t) => {
-            t == null || t.removeEventListener('mouseenter', (s) => D(s)),
-              t == null || t.removeEventListener('mouseleave', M);
+            t == null || t.removeEventListener('mouseenter', (s) => C(s)),
+              t == null || t.removeEventListener('mouseleave', Y);
           });
         }
       );
   },
-  W = (e) => {
+  z = (e) => {
     const t = e || m;
     if (!t || m) return;
     t.innerHTML = '';
     const s = L();
-    P(s[l].value, t), K();
+    P(s[l].value, t), Z();
     const a = setInterval(() => b(), j);
     return (
       m || (m = document.querySelector('#image-container')),
       () => clearInterval(a)
     );
   },
-  Z = () => {
+  K = () => {
     const e = L();
     m && ((m.innerHTML = ''), P(e[l].value, m));
   },
@@ -381,7 +381,7 @@ const B = I.map((e) => ({ ...e, value: e.value.map((t) => q + t) })),
       if (!A) return;
       A = !1;
     }
-    Z();
+    K();
   },
   V = () => {
     const e = document.querySelector(`[data-image-index="${l}"]`);
@@ -414,7 +414,7 @@ document.querySelector('#js-hero-section').innerHTML = `
         <div id="image-container" class="image-container"></div>
         <div class="hero-flex">
           <a
-            href="http://compass.tech/get-a-quote"
+            href="https://partners.calm.network/compass/quotes/services/landTaxCalculation?calmPartnerInt[…]ZSIsIm1ldGEiOnsicmVmZXJyZXIiOiJDb21wYXNzIEdhdGV3YXkifX0%3D"
             target="_blank"
             class="hero-button hero-button-secondary hero-js-button"
             data-image-index="3"
@@ -481,4 +481,4 @@ document.querySelector('#js-hero-section').innerHTML = `
     </section>
 `;
 const S = document.querySelector('#image-container');
-S && W(S);
+S && z(S);
