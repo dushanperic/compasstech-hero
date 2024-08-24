@@ -1,34 +1,34 @@
 (function () {
   const t = document.createElement('link').relList;
   if (t && t.supports && t.supports('modulepreload')) return;
-  for (const n of document.querySelectorAll('link[rel="modulepreload"]')) a(n);
-  new MutationObserver((n) => {
-    for (const o of n)
+  for (const s of document.querySelectorAll('link[rel="modulepreload"]')) a(s);
+  new MutationObserver((s) => {
+    for (const o of s)
       if (o.type === 'childList')
         for (const r of o.addedNodes)
           r.tagName === 'LINK' && r.rel === 'modulepreload' && a(r);
   }).observe(document, { childList: !0, subtree: !0 });
-  function s(n) {
+  function n(s) {
     const o = {};
     return (
-      n.integrity && (o.integrity = n.integrity),
-      n.referrerPolicy && (o.referrerPolicy = n.referrerPolicy),
-      n.crossOrigin === 'use-credentials'
+      s.integrity && (o.integrity = s.integrity),
+      s.referrerPolicy && (o.referrerPolicy = s.referrerPolicy),
+      s.crossOrigin === 'use-credentials'
         ? (o.credentials = 'include')
-        : n.crossOrigin === 'anonymous'
+        : s.crossOrigin === 'anonymous'
         ? (o.credentials = 'omit')
         : (o.credentials = 'same-origin'),
       o
     );
   }
-  function a(n) {
-    if (n.ep) return;
-    n.ep = !0;
-    const o = s(n);
-    fetch(n.href, o);
+  function a(s) {
+    if (s.ep) return;
+    s.ep = !0;
+    const o = n(s);
+    fetch(s.href, o);
   }
 })();
-const H = [
+const U = [
     {
       name: 'image0',
       value: [
@@ -205,192 +205,205 @@ const H = [
       ],
     },
   ],
-  d = {
+  m = {
     PRIMARY_IN: 'primaryAnimationIn',
     PRIMARY_OUT: 'primaryAnimationOut',
     SECONDARY_IN: 'secondaryAnimationIn',
     SECONDARY_OUT: 'secondaryAnimationOut',
     DEFAULT_IN: 'defaultAnimationIn',
   },
-  v = { PRIMARY: 'primary', SECONDARY: 'secondary' },
+  A = { PRIMARY: 'primary', SECONDARY: 'secondary' },
   u = {
     PRIMARY: 'primary-bg',
     SECONDARY: 'secondary-bg',
     DEFAULT: 'default-bg',
   },
-  h = { PRIMARY: '1', SECONDARY: '2', DEFAULT: '0' },
-  j = 3500,
-  U = 0,
-  M = 500,
-  T = 768,
+  v = { PRIMARY: '1', SECONDARY: '2', DEFAULT: '0' },
+  F = 3500,
+  j = 0,
+  T = 500,
+  p = { SM: 768, MD: 1024, MD2: 1366, LG: 1440 },
   x = (e) => {
-    Object.values(d).forEach((t) => e.classList.remove(t));
+    Object.values(m).forEach((t) => e.classList.remove(t));
   },
   _ = (e) => {
     Object.values(u).forEach((t) => e.classList.remove(t));
   },
-  O = (e, t) => (!e || !t ? !1 : e.classList.contains(t)),
-  f = (e, t) => t.forEach((s) => e.classList.add(s)),
-  F = (e, t) => Math.floor(Math.random() * (t - e + 1) + e),
-  R = () => `${F(U, M)}ms`;
-let m = document.querySelector('#image-container');
-const q = '00000000000000000000000000',
-  N = [3, 4];
-let c = [],
-  l = 0,
-  p = !1,
-  A = window.innerWidth < T,
+  D = (e, t) => (!e || !t ? !1 : e.classList.contains(t)),
+  h = (e, t) => t.forEach((n) => e.classList.add(n)),
+  q = (e, t) => Math.floor(Math.random() * (t - e + 1) + e),
+  R = () => `${q(j, T)}ms`;
+let d = document.querySelector('#image-container');
+const B = '00000000000000000000000000',
+  M = '000000',
+  W = '0000000000000000000000000000000',
+  w = [3, 4];
+let l = [],
+  c = 0,
+  I = !1,
   E = [],
-  w = !1,
-  I = H;
-const B = I.map((e) => ({ ...e, value: e.value.map((t) => q + t) })),
-  L = () => (A ? I : B),
-  k = (e) => {
+  N = !1,
+  f = U;
+const Z = f.map((e) => ({ ...e, value: e.value.map((t) => M + t + M) })),
+  k = f.map((e) => ({ ...e, value: e.value.map((t) => W + t) })),
+  z = f.map((e) => ({ ...e, value: e.value.map((t) => B + t) })),
+  L = () =>
+    window.innerWidth <= p.SM
+      ? f
+      : window.innerWidth >= p.SM && window.innerWidth <= p.MD
+      ? Z
+      : window.innerWidth >= p.MD && window.innerWidth <= p.MD2
+      ? k
+      : z,
+  X = (e) => {
     x(e),
       _(e),
-      I.forEach((t, s) => {
-        e.classList.remove(String(s));
+      f.forEach((t, n) => {
+        e.classList.remove(String(n));
       });
   },
-  X = (e) => {
+  G = (e) => {
     switch (e) {
-      case v.PRIMARY:
-        return [u.PRIMARY, d.PRIMARY_OUT];
-      case v.SECONDARY:
-        return [u.SECONDARY, d.SECONDARY_OUT];
+      case A.PRIMARY:
+        return [u.PRIMARY, m.PRIMARY_OUT];
+      case A.SECONDARY:
+        return [u.SECONDARY, m.SECONDARY_OUT];
       default:
         return null;
     }
   },
-  D = (e, t) => {
+  S = (e, t) => {
     x(e), _(e);
-    const s = X(t);
-    s && ((e.style.animationDelay = R()), f(e, s));
+    const n = G(t);
+    n && ((e.style.animationDelay = R()), h(e, n));
   },
   P = (e, t) => {
     if (!e || !t) {
       console.error('No image container provided', { container: t, img: e });
       return;
     }
-    e.forEach((s) => {
+    e.forEach((n) => {
       const a = document.createElement('div');
-      f(a, ['row']),
-        s.split('').map((n) => {
-          const o = document.createElement('span');
-          switch ((f(o, ['dot', n]), (o.style.animationDelay = R()), n)) {
-            case h.PRIMARY:
-              c = [u.DEFAULT, d.PRIMARY_IN];
+      h(a, ['row']),
+        n.split('').map((s) => {
+          const o = document.createElement('div'),
+            r = document.createElement('div');
+          switch ((h(o, ['dot', s]), (o.style.animationDelay = R()), s)) {
+            case v.PRIMARY:
+              l = [u.DEFAULT, m.PRIMARY_IN];
               break;
-            case h.SECONDARY:
-              c = [u.DEFAULT, d.SECONDARY_IN];
+            case v.SECONDARY:
+              l = [u.DEFAULT, m.SECONDARY_IN];
               break;
             default:
-              c = [u.DEFAULT, d.DEFAULT_IN];
+              l = [u.DEFAULT, m.DEFAULT_IN];
               break;
           }
-          f(o, c), a.append(o);
+          h(r, l), o.append(r), a.append(o);
         }),
         t.append(a);
     }),
       (E = document.querySelectorAll('.dot'));
   },
-  b = (e) => {
-    if (p) return null;
-    N.includes(l) && !w && (l = 0);
+  H = (e) => {
+    if (I) return null;
+    w.includes(c) && !N && (c = 0);
     const t = L();
-    let s = [];
-    const a = e || t[l].value;
+    let n = [];
+    const a = e || t[c].value;
     E = document.querySelectorAll('.dot');
-    const n = a.reduce((r, g) => (r += g.length), 0);
+    const s = a.reduce((r, g) => (r += g.length), 0);
     if (
-      (a.forEach((r) => s.push(...r)),
-      E.length !== n ||
-        (s.forEach((r, g) => {
-          const i = E[g];
-          O(i, h.PRIMARY) && D(i, v.PRIMARY),
-            O(i, h.SECONDARY) && D(i, v.SECONDARY);
+      (a.forEach((r) => n.push(...r)),
+      E.length !== s ||
+        (n.forEach((r, g) => {
+          const i = E[g].getElementsByTagName('div')[0];
+          D(i, v.PRIMARY) && S(i, A.PRIMARY),
+            D(i, v.SECONDARY) && S(i, A.SECONDARY);
         }),
-        p))
+        I))
     )
       return null;
     const o = setTimeout(() => {
-      s.forEach((r, g) => {
-        const i = E[g];
-        switch (((i.style.animationDelay = R()), k(i), r)) {
-          case h.PRIMARY:
-            (c = [u.DEFAULT, d.PRIMARY_IN]), f(i, c);
+      n.forEach((r, g) => {
+        const i = E[g].getElementsByTagName('div')[0];
+        switch (((i.style.animationDelay = R()), X(i), r)) {
+          case v.PRIMARY:
+            (l = [u.DEFAULT, m.PRIMARY_IN]), h(i, l);
             break;
-          case h.SECONDARY:
-            (c = [u.DEFAULT, d.SECONDARY_IN]), f(i, c);
+          case v.SECONDARY:
+            (l = [u.DEFAULT, m.SECONDARY_IN]), h(i, l);
             break;
           default:
-            (c = [u.DEFAULT, d.DEFAULT_IN]), f(i, c);
+            (l = [u.DEFAULT, m.DEFAULT_IN]), h(i, l);
         }
         i.classList.add(r);
       });
-    }, M);
-    return V(), l < I.length - 1 ? l++ : (l = 0), () => clearTimeout(o);
+    }, T);
+    return $(), c < f.length - 1 ? c++ : (c = 0), () => clearTimeout(o);
   },
-  C = (e) => {
+  O = (e) => {
     const t = e.target,
-      s = Number(t == null ? void 0 : t.getAttribute('data-image-index'));
-    (l = s), (w = N.includes(s));
+      n = Number(t == null ? void 0 : t.getAttribute('data-image-index'));
+    (c = n), (N = w.includes(n));
     const a = L();
-    b(a[l].value), (p = !0);
+    H(a[c].value), (I = !0);
   },
-  Y = () => {
-    (p = !1), (w = !1);
+  C = () => {
+    (I = !1), (N = !1);
   },
-  Z = () => {
+  V = () => {
     const e = document.querySelectorAll('.hero-js-button');
     if (e != null && e.length)
       return (
         e.forEach((t) => {
-          t == null || t.addEventListener('mouseenter', (s) => C(s)),
-            t == null || t.addEventListener('mouseleave', Y);
+          t == null || t.addEventListener('mouseenter', (n) => O(n)),
+            t == null || t.addEventListener('mouseleave', C);
         }),
         () => {
           e.forEach((t) => {
-            t == null || t.removeEventListener('mouseenter', (s) => C(s)),
-              t == null || t.removeEventListener('mouseleave', Y);
+            t == null || t.removeEventListener('mouseenter', (n) => O(n)),
+              t == null || t.removeEventListener('mouseleave', C);
           });
         }
       );
   },
-  z = (e) => {
-    const t = e || m;
-    if (!t || m) return;
+  J = (e) => {
+    const t = e || d;
+    if (!t || d) return;
     t.innerHTML = '';
-    const s = L();
-    P(s[l].value, t), Z();
-    const a = setInterval(() => b(), j);
+    const n = L();
+    P(n[c].value, t), V();
+    const a = setInterval(() => H(), F);
     return (
-      m || (m = document.querySelector('#image-container')),
+      d || (d = document.querySelector('#image-container')),
       () => clearInterval(a)
     );
   },
   K = () => {
     const e = L();
-    m && ((m.innerHTML = ''), P(e[l].value, m));
+    d && ((d.innerHTML = ''), P(e[c].value, d));
   },
   y = () => {
-    if (window.innerWidth <= T) {
-      if (A) return;
-      A = !0;
-    } else {
-      if (!A) return;
-      A = !1;
-    }
-    K();
+    var t;
+    let e =
+      (t = d == null ? void 0 : d.getBoundingClientRect()) == null
+        ? void 0
+        : t.width;
+    document.documentElement.style.setProperty(
+      '--image-container-width',
+      String(e) + 'px'
+    ),
+      K();
   },
-  V = () => {
-    const e = document.querySelector(`[data-image-index="${l}"]`);
+  $ = () => {
+    const e = document.querySelector(`[data-image-index="${c}"]`);
     document.querySelectorAll('.hero-js-button').forEach((a) => {
       a.classList.remove('hero-js-copy-highlighted');
     });
-    const s = e == null ? void 0 : e.getAttribute('data-image-index');
-    s &&
-      (N.includes(Number(s)) ||
+    const n = e == null ? void 0 : e.getAttribute('data-image-index');
+    n &&
+      (w.includes(Number(n)) ||
         e == null ||
         e.classList.add('hero-js-copy-highlighted'));
   };
@@ -405,13 +418,16 @@ window.addEventListener(
   )
 );
 document.querySelector('#js-hero-section').innerHTML = `
-    <section class="hero-section">
-      <div class="hero-section-container">
+  <section class="hero-section">
+    <div class="hero-inner-container">
+      <div class="hero-upper-content">
         <h2 class="hero-title">
           Transforming Stamp Duty: From Complex to Clear
         </h2>
         <p class="hero-subtitle">Calculate your stamp duty today!</p>
-        <div id="image-container" class="image-container"></div>
+      </div>
+      <div id="image-container" class="image-container"></div>
+      <div class="hero-lower-content">
         <div class="hero-flex">
           <a
             href="https://partners.calm.network/compass/quotes/services/landTaxCalculation?calmPartnerInt[…]ZSIsIm1ldGEiOnsicmVmZXJyZXIiOiJDb21wYXNzIEdhdGV3YXkifX0%3D"
@@ -422,63 +438,70 @@ document.querySelector('#js-hero-section').innerHTML = `
             Get a quote
           </a>
 
-          <a href="https://www.compass.tech/solutions-residential-conveyancing" class="hero-button hero-js-button" data-image-index="4">
+          <a
+            href="https://www.compass.tech/solutions-residential-conveyancing"
+            class="hero-button hero-js-button"
+            data-image-index="4"
+          >
             Discover more
           </a>
         </div>
-        <button class="hero-js-button hero-js-copy" data-image-index="0">
-          <svg
-            width="15"
-            height="18"
-            viewBox="0 0 15 18"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M6.54781 0H0.699615L8.45224 9H8.45103L0.699224 18H6.5466L14.2992 9H14.2996L6.54781 0Z"
-              fill="#E7ECEA"
-            />
-          </svg>
-          <span>Satisfy your self-assessment obligation to HMRC</span>
-        </button>
-        <button class="hero-js-button hero-js-copy" data-image-index="1">
-          <svg
-            width="15"
-            height="18"
-            viewBox="0 0 15 18"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M6.54781 0H0.699615L8.45224 9H8.45103L0.699224 18H6.5466L14.2992 9H14.2996L6.54781 0Z"
-              fill="#E7ECEA"
-            />
-          </svg>
-          <span>Potential to save money on tax</span>
-        </button>
-        <button class="hero-js-button hero-js-copy" data-image-index="2">
-          <svg
-            width="15"
-            height="18"
-            viewBox="0 0 15 18"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M6.54781 0H0.699615L8.45224 9H8.45103L0.699224 18H6.5466L14.2992 9H14.2996L6.54781 0Z"
-              fill="#E7ECEA"
-            />
-          </svg>
-          <span>No risk of further tax implications</span>
-        </button>
+        <div>
+          <button class="hero-js-button hero-js-copy" data-image-index="0">
+            <svg
+              width="15"
+              height="18"
+              viewBox="0 0 15 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M6.54781 0H0.699615L8.45224 9H8.45103L0.699224 18H6.5466L14.2992 9H14.2996L6.54781 0Z"
+                fill="#E7ECEA"
+              />
+            </svg>
+            <span>Satisfy your self-assessment obligation to HMRC</span>
+          </button>
+          <button class="hero-js-button hero-js-copy" data-image-index="1">
+            <svg
+              width="15"
+              height="18"
+              viewBox="0 0 15 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M6.54781 0H0.699615L8.45224 9H8.45103L0.699224 18H6.5466L14.2992 9H14.2996L6.54781 0Z"
+                fill="#E7ECEA"
+              />
+            </svg>
+            <span>Potential to save money on tax</span>
+          </button>
+          <button class="hero-js-button hero-js-copy" data-image-index="2">
+            <svg
+              width="15"
+              height="18"
+              viewBox="0 0 15 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M6.54781 0H0.699615L8.45224 9H8.45103L0.699224 18H6.5466L14.2992 9H14.2996L6.54781 0Z"
+                fill="#E7ECEA"
+              />
+            </svg>
+            <span>No risk of further tax implications</span>
+          </button>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 `;
-const S = document.querySelector('#image-container');
-S && z(S);
+const Y = document.querySelector('#image-container');
+Y && J(Y);

@@ -7,7 +7,7 @@ import {
   AnimationType,
 } from './constants/keys';
 import { MAX_ANIMATION_DELAY, INTERVAL } from './constants/animation';
-import { SCREEN_BREAKPOINT } from './constants/screen';
+import { SCREEN_SIZE } from './constants/screen';
 import { ImageType } from './types/ImageType';
 import {
   clearAnimationClass,
@@ -19,24 +19,56 @@ import { getRandomAnimationDelayValue } from './utils/commonUtils';
 
 let imageContainer = document.querySelector<HTMLDivElement>('#image-container');
 
-const staticDots = '00000000000000000000000000';
+const staticDotsLargeScreen = '00000000000000000000000000';
+const staticDotsMediumScreen = '000000';
+const staticDotsMediumHorizontalScreen = '0000000000000000000000000000000';
 const excludedFromLoopImagesIndexes = [3, 4];
 let classList: string[] = [];
 let currentImageIndex = 0;
 let isPaused = false;
-let isMobile = window.innerWidth < SCREEN_BREAKPOINT;
 let dots: NodeListOf<HTMLSpanElement> | [] = [];
 let isMouseMove = false;
 let isLinkButtonHovered = false;
 
 let mobileImages: ImageType[] = data;
+
+const tabletImages = mobileImages.map((obj) => ({
+  ...obj,
+  value: obj.value.map(
+    (str) => staticDotsMediumScreen + str + staticDotsMediumScreen
+  ),
+}));
+
+const tablet2Images = mobileImages.map((obj) => ({
+  ...obj,
+  value: obj.value.map((str) => staticDotsMediumHorizontalScreen + str),
+}));
+
 const desktopImages = mobileImages.map((obj) => ({
   ...obj,
-  value: obj.value.map((str) => staticDots + str),
+  value: obj.value.map((str) => staticDotsLargeScreen + str),
 }));
 
 const getImages = () => {
-  return isMobile ? mobileImages : desktopImages;
+  if (window.innerWidth <= SCREEN_SIZE.SM) {
+    return mobileImages;
+  }
+
+  if (
+    window.innerWidth >= SCREEN_SIZE.SM &&
+    window.innerWidth <= SCREEN_SIZE.MD
+  ) {
+    return tabletImages;
+  }
+
+  if (
+    window.innerWidth >= SCREEN_SIZE.MD &&
+    window.innerWidth <= SCREEN_SIZE.MD2
+  ) {
+    return tablet2Images;
+  }
+
+  return desktopImages;
 };
 
 const clearJSClasses = (el: HTMLSpanElement): void => {
@@ -88,7 +120,8 @@ const drawImage = (
     const row: HTMLDivElement = document.createElement('div');
     setElementClass(row, ['row']);
     item.split('').map((item) => {
-      const dotEl: HTMLSpanElement = document.createElement('span');
+      const dotEl: HTMLSpanElement = document.createElement('div');
+      const div: HTMLDivElement = document.createElement('div');
 
       setElementClass(dotEl, ['dot', item]);
       dotEl.style.animationDelay = getRandomAnimationDelayValue();
@@ -105,7 +138,8 @@ const drawImage = (
           break;
       }
 
-      setElementClass(dotEl, classList);
+      setElementClass(div, classList);
+      dotEl.append(div);
       row.append(dotEl);
     });
 
@@ -129,10 +163,10 @@ const updateImage = (
     currentImageIndex = 0;
   }
 
-  const testImages = getImages();
+  const _images = getImages();
 
   let nextImageChars: string[] = [];
-  const nextImage = image ? image : testImages[currentImageIndex].value;
+  const nextImage = image ? image : _images[currentImageIndex].value;
   dots = document.querySelectorAll<HTMLSpanElement>(`.dot`);
 
   const charsLength: number = nextImage.reduce(
@@ -147,7 +181,9 @@ const updateImage = (
   }
 
   nextImageChars.forEach((_, index) => {
-    const el = dots[index];
+    const div = dots[index].getElementsByTagName('div');
+    const el = div[0];
+
     if (elementHasClass(el, INPUT_CHARS.PRIMARY)) {
       animateOutByType(el, ANIMATION_TYPE.PRIMARY);
     }
@@ -163,7 +199,8 @@ const updateImage = (
 
   const timer: ReturnType<typeof setTimeout> = setTimeout((): void => {
     nextImageChars.forEach((char, index) => {
-      const el = dots[index];
+      const div = dots[index].getElementsByTagName('div');
+      const el = div[0];
       el.style.animationDelay = getRandomAnimationDelayValue();
 
       clearJSClasses(el);
@@ -276,13 +313,12 @@ const renderResizedImage = () => {
 };
 
 const handleWindowResize = () => {
-  if (window.innerWidth <= SCREEN_BREAKPOINT) {
-    if (isMobile) return;
-    isMobile = true;
-  } else {
-    if (!isMobile) return;
-    isMobile = false;
-  }
+  let imgContainerWidth = imageContainer?.getBoundingClientRect()?.width;
+
+  document.documentElement.style.setProperty(
+    '--image-container-width',
+    String(imgContainerWidth) + 'px'
+  );
 
   renderResizedImage();
 };
