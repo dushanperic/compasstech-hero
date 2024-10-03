@@ -205,15 +205,15 @@ const U = [
       ],
     },
   ],
-  m = {
+  u = {
     PRIMARY_IN: 'primaryAnimationIn',
     PRIMARY_OUT: 'primaryAnimationOut',
     SECONDARY_IN: 'secondaryAnimationIn',
     SECONDARY_OUT: 'secondaryAnimationOut',
     DEFAULT_IN: 'defaultAnimationIn',
   },
-  A = { PRIMARY: 'primary', SECONDARY: 'secondary' },
-  u = {
+  E = { PRIMARY: 'primary', SECONDARY: 'secondary' },
+  m = {
     PRIMARY: 'primary-bg',
     SECONDARY: 'secondary-bg',
     DEFAULT: 'default-bg',
@@ -224,50 +224,50 @@ const U = [
   T = 500,
   p = { SM: 768, MD: 1024, MD2: 1366, LG: 1440 },
   x = (e) => {
-    Object.values(m).forEach((t) => e.classList.remove(t));
-  },
-  _ = (e) => {
     Object.values(u).forEach((t) => e.classList.remove(t));
   },
-  D = (e, t) => (!e || !t ? !1 : e.classList.contains(t)),
+  _ = (e) => {
+    Object.values(m).forEach((t) => e.classList.remove(t));
+  },
+  M = (e, t) => (!e || !t ? !1 : e.classList.contains(t)),
   h = (e, t) => t.forEach((n) => e.classList.add(n)),
   q = (e, t) => Math.floor(Math.random() * (t - e + 1) + e),
-  R = () => `${q(j, T)}ms`;
+  w = () => `${q(j, T)}ms`;
 let d = document.querySelector('#image-container');
 const B = '00000000000000000000000000',
-  M = '000000',
+  D = '000000',
   W = '0000000000000000000000000000000',
-  w = [3, 4];
+  R = [3, 4];
 let l = [],
   c = 0,
-  I = !1,
-  E = [],
+  L = !1,
+  A = [],
   N = !1,
-  f = U;
-const Z = f.map((e) => ({ ...e, value: e.value.map((t) => M + t + M) })),
-  k = f.map((e) => ({ ...e, value: e.value.map((t) => W + t) })),
-  z = f.map((e) => ({ ...e, value: e.value.map((t) => B + t) })),
-  L = () =>
+  g = U;
+const z = g.map((e) => ({ ...e, value: e.value.map((t) => D + t + D) })),
+  k = g.map((e) => ({ ...e, value: e.value.map((t) => W + t) })),
+  Z = g.map((e) => ({ ...e, value: e.value.map((t) => B + t) })),
+  I = () =>
     window.innerWidth <= p.SM
-      ? f
+      ? g
       : window.innerWidth >= p.SM && window.innerWidth <= p.MD
-      ? Z
+      ? z
       : window.innerWidth >= p.MD && window.innerWidth <= p.MD2
       ? k
-      : z,
-  X = (e) => {
+      : Z,
+  K = (e) => {
     x(e),
       _(e),
-      f.forEach((t, n) => {
+      g.forEach((t, n) => {
         e.classList.remove(String(n));
       });
   },
   G = (e) => {
     switch (e) {
-      case A.PRIMARY:
-        return [u.PRIMARY, m.PRIMARY_OUT];
-      case A.SECONDARY:
-        return [u.SECONDARY, m.SECONDARY_OUT];
+      case E.PRIMARY:
+        return [m.PRIMARY, u.PRIMARY_OUT];
+      case E.SECONDARY:
+        return [m.SECONDARY, u.SECONDARY_OUT];
       default:
         return null;
     }
@@ -275,7 +275,7 @@ const Z = f.map((e) => ({ ...e, value: e.value.map((t) => M + t + M) })),
   S = (e, t) => {
     x(e), _(e);
     const n = G(t);
-    n && ((e.style.animationDelay = R()), h(e, n));
+    n && ((e.style.animationDelay = w()), h(e, n));
   },
   P = (e, t) => {
     if (!e || !t) {
@@ -288,69 +288,69 @@ const Z = f.map((e) => ({ ...e, value: e.value.map((t) => M + t + M) })),
         n.split('').map((s) => {
           const o = document.createElement('div'),
             r = document.createElement('div');
-          switch ((h(o, ['dot', s]), (o.style.animationDelay = R()), s)) {
+          switch ((h(o, ['dot', s]), (o.style.animationDelay = w()), s)) {
             case v.PRIMARY:
-              l = [u.DEFAULT, m.PRIMARY_IN];
+              l = [m.DEFAULT, u.PRIMARY_IN];
               break;
             case v.SECONDARY:
-              l = [u.DEFAULT, m.SECONDARY_IN];
+              l = [m.DEFAULT, u.SECONDARY_IN];
               break;
             default:
-              l = [u.DEFAULT, m.DEFAULT_IN];
+              l = [m.DEFAULT, u.DEFAULT_IN];
               break;
           }
           h(r, l), o.append(r), a.append(o);
         }),
         t.append(a);
     }),
-      (E = document.querySelectorAll('.dot'));
+      (A = document.querySelectorAll('.dot'));
   },
   H = (e) => {
-    if (I) return null;
-    w.includes(c) && !N && (c = 0);
-    const t = L();
+    if (L) return null;
+    R.includes(c) && !N && (c = 0);
+    const t = I();
     let n = [];
     const a = e || t[c].value;
-    E = document.querySelectorAll('.dot');
-    const s = a.reduce((r, g) => (r += g.length), 0);
+    A = document.querySelectorAll('.dot');
+    const s = a.reduce((r, f) => (r += f.length), 0);
     if (
       (a.forEach((r) => n.push(...r)),
-      E.length !== s ||
-        (n.forEach((r, g) => {
-          const i = E[g].getElementsByTagName('div')[0];
-          D(i, v.PRIMARY) && S(i, A.PRIMARY),
-            D(i, v.SECONDARY) && S(i, A.SECONDARY);
+      A.length !== s ||
+        (n.forEach((r, f) => {
+          const i = A[f].getElementsByTagName('div')[0];
+          M(i, v.PRIMARY) && S(i, E.PRIMARY),
+            M(i, v.SECONDARY) && S(i, E.SECONDARY);
         }),
-        I))
+        L))
     )
       return null;
     const o = setTimeout(() => {
-      n.forEach((r, g) => {
-        const i = E[g].getElementsByTagName('div')[0];
-        switch (((i.style.animationDelay = R()), X(i), r)) {
+      n.forEach((r, f) => {
+        const i = A[f].getElementsByTagName('div')[0];
+        switch (((i.style.animationDelay = w()), K(i), r)) {
           case v.PRIMARY:
-            (l = [u.DEFAULT, m.PRIMARY_IN]), h(i, l);
+            (l = [m.DEFAULT, u.PRIMARY_IN]), h(i, l);
             break;
           case v.SECONDARY:
-            (l = [u.DEFAULT, m.SECONDARY_IN]), h(i, l);
+            (l = [m.DEFAULT, u.SECONDARY_IN]), h(i, l);
             break;
           default:
-            (l = [u.DEFAULT, m.DEFAULT_IN]), h(i, l);
+            (l = [m.DEFAULT, u.DEFAULT_IN]), h(i, l);
         }
         i.classList.add(r);
       });
     }, T);
-    return $(), c < f.length - 1 ? c++ : (c = 0), () => clearTimeout(o);
+    return X(), c < g.length - 1 ? c++ : (c = 0), () => clearTimeout(o);
   },
   O = (e) => {
     const t = e.target,
       n = Number(t == null ? void 0 : t.getAttribute('data-image-index'));
-    (c = n), (N = w.includes(n));
-    const a = L();
-    H(a[c].value), (I = !0);
+    (c = n), (N = R.includes(n));
+    const a = I();
+    H(a[c].value), (L = !0);
   },
   C = () => {
-    (I = !1), (N = !1);
+    (L = !1), (N = !1);
   },
   V = () => {
     const e = document.querySelectorAll('.hero-js-button');
@@ -368,11 +368,11 @@ const Z = f.map((e) => ({ ...e, value: e.value.map((t) => M + t + M) })),
         }
       );
   },
-  J = (e) => {
+  $ = (e) => {
     const t = e || d;
     if (!t || d) return;
     t.innerHTML = '';
-    const n = L();
+    const n = I();
     P(n[c].value, t), V();
     const a = setInterval(() => H(), F);
     return (
@@ -380,8 +380,8 @@ const Z = f.map((e) => ({ ...e, value: e.value.map((t) => M + t + M) })),
       () => clearInterval(a)
     );
   },
-  K = () => {
-    const e = L();
+  J = () => {
+    const e = I();
     d && ((d.innerHTML = ''), P(e[c].value, d));
   },
   y = () => {
@@ -394,16 +394,16 @@ const Z = f.map((e) => ({ ...e, value: e.value.map((t) => M + t + M) })),
       '--image-container-width',
       String(e) + 'px'
     ),
-      K();
+      J();
   },
-  $ = () => {
+  X = () => {
     const e = document.querySelector(`[data-image-index="${c}"]`);
     document.querySelectorAll('.hero-js-button').forEach((a) => {
       a.classList.remove('hero-js-copy-highlighted');
     });
     const n = e == null ? void 0 : e.getAttribute('data-image-index');
     n &&
-      (w.includes(Number(n)) ||
+      (R.includes(Number(n)) ||
         e == null ||
         e.classList.add('hero-js-copy-highlighted'));
   };
@@ -430,7 +430,7 @@ document.querySelector('#js-hero-section').innerHTML = `
       <div class="hero-lower-content">
         <div class="hero-flex">
           <a
-            href="https://partners.calm.network/compass/quotes/services/landTaxCalculation?calmPartnerInt[…]ZSIsIm1ldGEiOnsicmVmZXJyZXIiOiJDb21wYXNzIEdhdGV3YXkifX0%3D"
+            href="https://www.compass.tech/get-a-quote"
             target="_blank"
             class="hero-button hero-button-secondary hero-js-button"
             data-image-index="3"
@@ -504,4 +504,4 @@ document.querySelector('#js-hero-section').innerHTML = `
   </section>
 `;
 const Y = document.querySelector('#image-container');
-Y && J(Y);
+Y && $(Y);
