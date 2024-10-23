@@ -340,8 +340,8 @@
   /* TYPOGRAPHY */
 
   .hero-title {
-    font-size: 52px;
-    line-height: 56px;
+    font-size: 39px;
+    line-height: 42px;
     max-width: 605px;
     padding-left: 0px;
     padding-right: 0px;
@@ -478,8 +478,8 @@
   }
 
   .hero-title {
-    font-size: 72px;
-    line-height: 76px;
+    font-size: 54px;
+    line-height: 57px;
     margin-top: 0;
     margin-bottom: 26px;
   }
