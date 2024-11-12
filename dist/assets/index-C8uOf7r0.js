@@ -28,7 +28,7 @@
     fetch(s.href, o);
   }
 })();
-const F = [
+const U = [
     {
       name: 'image0',
       value: [
@@ -205,77 +205,77 @@ const F = [
       ],
     },
   ],
-  u = {
+  m = {
     PRIMARY_IN: 'primaryAnimationIn',
     PRIMARY_OUT: 'primaryAnimationOut',
     SECONDARY_IN: 'secondaryAnimationIn',
     SECONDARY_OUT: 'secondaryAnimationOut',
     DEFAULT_IN: 'defaultAnimationIn',
   },
-  E = { PRIMARY: 'primary', SECONDARY: 'secondary' },
-  m = {
+  A = { PRIMARY: 'primary', SECONDARY: 'secondary' },
+  u = {
     PRIMARY: 'primary-bg',
     SECONDARY: 'secondary-bg',
     DEFAULT: 'default-bg',
   },
   v = { PRIMARY: '1', SECONDARY: '2', DEFAULT: '0' },
-  j = 3500,
-  q = 0,
-  Y = 500,
+  F = 3500,
+  j = 0,
+  T = 500,
   p = { SM: 768, MD: 1024, MD2: 1366, LG: 1440 },
   x = (e) => {
-    Object.values(u).forEach((t) => e.classList.remove(t));
-  },
-  _ = (e) => {
     Object.values(m).forEach((t) => e.classList.remove(t));
   },
-  N = (e, t) => (!e || !t ? !1 : e.classList.contains(t)),
+  _ = (e) => {
+    Object.values(u).forEach((t) => e.classList.remove(t));
+  },
+  D = (e, t) => (!e || !t ? !1 : e.classList.contains(t)),
   h = (e, t) => t.forEach((n) => e.classList.add(n)),
-  B = (e, t) => Math.floor(Math.random() * (t - e + 1) + e),
-  y = () => `${B(q, Y)}ms`;
+  q = (e, t) => Math.floor(Math.random() * (t - e + 1) + e),
+  R = () => `${q(j, T)}ms`;
 let d = document.querySelector('#image-container');
-const W = '00000000000000000000000000',
+const B = '00000000000000000000000000',
   M = '000000',
-  z = '0000000000000000000000000000000',
-  R = [3, 4];
+  W = '0000000000000000000000000000000',
+  w = [3, 4];
 let l = [],
   c = 0,
-  L = !1,
-  A = [],
-  w = !1,
-  f = F;
-const k = f.map((e) => ({ ...e, value: e.value.map((t) => M + t + M) })),
-  Z = f.map((e) => ({ ...e, value: e.value.map((t) => z + t) })),
-  K = f.map((e) => ({ ...e, value: e.value.map((t) => W + t) })),
-  I = () =>
+  I = !1,
+  E = [],
+  N = !1,
+  f = U;
+const Z = f.map((e) => ({ ...e, value: e.value.map((t) => M + t + M) })),
+  k = f.map((e) => ({ ...e, value: e.value.map((t) => W + t) })),
+  z = f.map((e) => ({ ...e, value: e.value.map((t) => B + t) })),
+  L = () =>
     window.innerWidth <= p.SM
       ? f
       : window.innerWidth >= p.SM && window.innerWidth <= p.MD
-      ? k
-      : window.innerWidth >= p.MD && window.innerWidth <= p.MD2
       ? Z
-      : K,
-  G = (e) => {
+      : window.innerWidth >= p.MD && window.innerWidth <= p.MD2
+      ? k
+      : z,
+  X = (e) => {
     x(e),
       _(e),
       f.forEach((t, n) => {
         e.classList.remove(String(n));
       });
   },
-  V = (e) => {
+  G = (e) => {
     switch (e) {
-      case E.PRIMARY:
-        return [m.PRIMARY, u.PRIMARY_OUT];
-      case E.SECONDARY:
-        return [m.SECONDARY, u.SECONDARY_OUT];
+      case A.PRIMARY:
+        return [u.PRIMARY, m.PRIMARY_OUT];
+      case A.SECONDARY:
+        return [u.SECONDARY, m.SECONDARY_OUT];
       default:
         return null;
     }
   },
-  D = (e, t) => {
+  S = (e, t) => {
     x(e), _(e);
-    const n = V(t);
-    n && ((e.style.animationDelay = y()), h(e, n));
+    const n = G(t);
+    n && ((e.style.animationDelay = R()), h(e, n));
   },
   P = (e, t) => {
     if (!e || !t) {
@@ -288,82 +288,82 @@ const k = f.map((e) => ({ ...e, value: e.value.map((t) => M + t + M) })),
         n.split('').map((s) => {
           const o = document.createElement('div'),
             r = document.createElement('div');
-          switch ((h(o, ['dot', s]), (o.style.animationDelay = y()), s)) {
+          switch ((h(o, ['dot', s]), (o.style.animationDelay = R()), s)) {
             case v.PRIMARY:
-              l = [m.DEFAULT, u.PRIMARY_IN];
+              l = [u.DEFAULT, m.PRIMARY_IN];
               break;
             case v.SECONDARY:
-              l = [m.DEFAULT, u.SECONDARY_IN];
+              l = [u.DEFAULT, m.SECONDARY_IN];
               break;
             default:
-              l = [m.DEFAULT, u.DEFAULT_IN];
+              l = [u.DEFAULT, m.DEFAULT_IN];
               break;
           }
           h(r, l), o.append(r), a.append(o);
         }),
         t.append(a);
     }),
-      (A = document.querySelectorAll('.dot'));
+      (E = document.querySelectorAll('.dot'));
   },
-  b = (e) => {
-    if (L) return null;
-    R.includes(c) && !w && (c = 0);
-    const t = I();
+  H = (e) => {
+    if (I) return null;
+    w.includes(c) && !N && (c = 0);
+    const t = L();
     let n = [];
     const a = e || t[c].value;
-    A = document.querySelectorAll('.dot');
+    E = document.querySelectorAll('.dot');
     const s = a.reduce((r, g) => (r += g.length), 0);
     if (
       (a.forEach((r) => n.push(...r)),
-      A.length !== s ||
+      E.length !== s ||
         (n.forEach((r, g) => {
-          const i = A[g].getElementsByTagName('div')[0];
-          N(i, v.PRIMARY) && D(i, E.PRIMARY),
-            N(i, v.SECONDARY) && D(i, E.SECONDARY);
+          const i = E[g].getElementsByTagName('div')[0];
+          D(i, v.PRIMARY) && S(i, A.PRIMARY),
+            D(i, v.SECONDARY) && S(i, A.SECONDARY);
         }),
-        L))
+        I))
     )
       return null;
     const o = setTimeout(() => {
       n.forEach((r, g) => {
-        const i = A[g].getElementsByTagName('div')[0];
-        switch (((i.style.animationDelay = y()), G(i), r)) {
+        const i = E[g].getElementsByTagName('div')[0];
+        switch (((i.style.animationDelay = R()), X(i), r)) {
           case v.PRIMARY:
-            (l = [m.DEFAULT, u.PRIMARY_IN]), h(i, l);
+            (l = [u.DEFAULT, m.PRIMARY_IN]), h(i, l);
             break;
           case v.SECONDARY:
-            (l = [m.DEFAULT, u.SECONDARY_IN]), h(i, l);
+            (l = [u.DEFAULT, m.SECONDARY_IN]), h(i, l);
             break;
           default:
-            (l = [m.DEFAULT, u.DEFAULT_IN]), h(i, l);
+            (l = [u.DEFAULT, m.DEFAULT_IN]), h(i, l);
         }
         i.classList.add(r);
       });
-    }, Y);
-    return Q(), c < f.length - 1 ? c++ : (c = 0), () => clearTimeout(o);
+    }, T);
+    return $(), c < f.length - 1 ? c++ : (c = 0), () => clearTimeout(o);
   },
-  S = (e) => {
+  O = (e) => {
     const t = e.target,
       n = Number(t == null ? void 0 : t.getAttribute('data-image-index'));
-    (c = n), (w = R.includes(n));
-    const a = I();
-    b(a[c].value), (L = !0);
+    (c = n), (N = w.includes(n));
+    const a = L();
+    H(a[c].value), (I = !0);
   },
-  O = () => {
-    (L = !1), (w = !1);
+  C = () => {
+    (I = !1), (N = !1);
   },
-  $ = () => {
+  V = () => {
     const e = document.querySelectorAll('.hero-js-button');
     if (e != null && e.length)
       return (
         e.forEach((t) => {
-          t == null || t.addEventListener('mouseenter', (n) => S(n)),
-            t == null || t.addEventListener('mouseleave', O);
+          t == null || t.addEventListener('mouseenter', (n) => O(n)),
+            t == null || t.addEventListener('mouseleave', C);
         }),
         () => {
           e.forEach((t) => {
-            t == null || t.removeEventListener('mouseenter', (n) => S(n)),
-              t == null || t.removeEventListener('mouseleave', O);
+            t == null || t.removeEventListener('mouseenter', (n) => O(n)),
+              t == null || t.removeEventListener('mouseleave', C);
           });
         }
       );
@@ -372,19 +372,19 @@ const k = f.map((e) => ({ ...e, value: e.value.map((t) => M + t + M) })),
     const t = e || d;
     if (!t || d) return;
     t.innerHTML = '';
-    const n = I();
-    P(n[c].value, t), $();
-    const a = setInterval(() => b(), j);
+    const n = L();
+    P(n[c].value, t), V();
+    const a = setInterval(() => H(), F);
     return (
       d || (d = document.querySelector('#image-container')),
       () => clearInterval(a)
     );
   },
-  X = () => {
-    const e = I();
+  K = () => {
+    const e = L();
     d && ((d.innerHTML = ''), P(e[c].value, d));
   },
-  H = () => {
+  y = () => {
     var t;
     let e =
       (t = d == null ? void 0 : d.getBoundingClientRect()) == null
@@ -394,39 +394,29 @@ const k = f.map((e) => ({ ...e, value: e.value.map((t) => M + t + M) })),
       '--image-container-width',
       String(e) + 'px'
     ),
-      X();
+      K();
   },
-  Q = () => {
+  $ = () => {
     const e = document.querySelector(`[data-image-index="${c}"]`);
     document.querySelectorAll('.hero-js-button').forEach((a) => {
       a.classList.remove('hero-js-copy-highlighted');
     });
     const n = e == null ? void 0 : e.getAttribute('data-image-index');
     n &&
-      (R.includes(Number(n)) ||
+      (w.includes(Number(n)) ||
         e == null ||
         e.classList.add('hero-js-copy-highlighted'));
-  },
-  C = e0(() => H(), 70);
+  };
 window.addEventListener(
   'load',
   () => (
-    H(),
-    window.addEventListener('resize', C),
+    y(),
+    window.addEventListener('resize', () => y()),
     () => {
-      window.removeEventListener('resize', C);
+      window.removeEventListener('resize', () => y());
     }
   )
 );
-function e0(e, t = 100) {
-  var n;
-  return (...a) => {
-    clearTimeout(n),
-      (n = setTimeout(() => {
-        e(...a);
-      }, t));
-  };
-}
 document.querySelector('#js-hero-section').innerHTML = `
   <section class="hero-section">
     <div class="hero-inner-container">
@@ -440,7 +430,7 @@ document.querySelector('#js-hero-section').innerHTML = `
       <div class="hero-lower-content">
         <div class="hero-flex">
           <a
-            href="https://www.compass.tech/get-a-quote"
+            href="https://partners.calm.network/compass/quotes/services/landTaxCalculation?calmPartnerInt[…]ZSIsIm1ldGEiOnsicmVmZXJyZXIiOiJDb21wYXNzIEdhdGV3YXkifX0%3D"
             target="_blank"
             class="hero-button hero-button-secondary hero-js-button"
             data-image-index="3"
@@ -513,5 +503,5 @@ document.querySelector('#js-hero-section').innerHTML = `
     </div>
   </section>
 `;
-const T = document.querySelector('#image-container');
-T && J(T);
+const Y = document.querySelector('#image-container');
+Y && J(Y);

@@ -10,11 +10,6 @@
   --lg-dot-width: calc(var(--image-container-width) / 57);
   --large-dot-gap: 3px;
   --x-large-dot-gap: 4px;
-  --hero-height: auto;
-}
-body {
-  padding: 0;
-  margin: 0;
 }
 .image-container {
   box-sizing: border-box;
@@ -147,6 +142,7 @@ body {
   position: relative;
   background-color: #414343;
   padding: 55px 16px;
+  min-height: 100vh;
 }
 .hero-section-container {
   box-sizing: border-box;
@@ -259,19 +255,21 @@ body {
   }
   .hero-js-copy {
     font-size: 20px;
-    line-height: 29px;
-    margin-bottom: 20px;
+    line-height: 32px;
+    margin-bottom: 28px;
     padding-left: 0;
   }
   .hero-js-copy > svg {
     margin-right: 18px;
   }
   .hero-js-copy:hover {
+    font-size: 28px;
     font-weight: 700;
     border: none;
     outline: none;
   }
   .hero-js-copy-highlighted {
+    font-size: 28px;
     font-weight: 700;
     border: none;
     outline: none;
@@ -284,8 +282,8 @@ body {
     align-items: start;
   }
   .hero-title {
-    font-size: 39px;
-    line-height: 42px;
+    font-size: 52px;
+    line-height: 56px;
     max-width: 605px;
     padding-left: 0;
     padding-right: 0;
@@ -330,7 +328,8 @@ body {
     min-height: calc(var(--md-landscape-dot-width) - 5px);
   }
   .hero-section {
-    padding: 41px;
+    padding-left: 41px;
+    padding-right: 41px;
   }
   .image-container {
     margin-bottom: 34px;
@@ -371,11 +370,12 @@ body {
     min-height: calc(var(--lg-dot-width) - 5px);
   }
   .hero-section {
-    padding: 53px;
+    padding-left: 53px;
+    padding-right: 53px;
     position: relative;
-    height: var(--hero-height);
   }
   .hero-inner-container {
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -393,21 +393,17 @@ body {
   }
   .image-container {
     position: absolute;
-    margin-bottom: 0;
-    top: 0;
-    left: auto;
-    right: auto;
+    top: 48px;
   }
   .hero-flex {
-    margin-top: 36px;
-    margin-bottom: 52px;
+    margin-top: 51px;
+    margin-bottom: 76px;
   }
   .hero-title {
-    font-size: 54px;
-    line-height: 57px;
+    font-size: 72px;
+    line-height: 76px;
     margin-top: 0;
     margin-bottom: 26px;
-    margin-top: 3rem;
   }
   .hero-subtitle {
     font-size: 24px;
@@ -419,12 +415,13 @@ body {
     padding: 20px;
   }
   .hero-js-copy {
-    font-size: 25px;
-    line-height: 29px;
-    margin-bottom: 25px;
+    font-size: 28px;
+    line-height: 32px;
+    margin-bottom: 35px;
     padding-left: 0;
   }
-  .hero-js-copy:hover {
-    font-weight: 700;
+  .hero-js-copy:hover,
+  .hero-js-copy-highlighted {
+    font-size: 32px;
   }
 }
