@@ -327,10 +327,10 @@ const handleWindowResize = () => {
       String(heroSectionHeight + 106) + 'px'
     );
 
-    document.documentElement.style.setProperty(
-      '--image-container-width',
-      String(imgContainerWidth && imgContainerWidth / 1.1) + 'px'
-    );
+    // document.documentElement.style.setProperty(
+    //   '--image-container-width',
+    //   String(imgContainerWidth && imgContainerWidth / 1.1) + 'px'
+    // );
   }
 
   renderResizedImage();

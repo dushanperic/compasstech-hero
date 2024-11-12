@@ -1,31 +1,31 @@
 (function () {
   const t = document.createElement('link').relList;
   if (t && t.supports && t.supports('modulepreload')) return;
-  for (const o of document.querySelectorAll('link[rel="modulepreload"]')) s(o);
-  new MutationObserver((o) => {
-    for (const a of o)
-      if (a.type === 'childList')
-        for (const r of a.addedNodes)
-          r.tagName === 'LINK' && r.rel === 'modulepreload' && s(r);
+  for (const s of document.querySelectorAll('link[rel="modulepreload"]')) a(s);
+  new MutationObserver((s) => {
+    for (const o of s)
+      if (o.type === 'childList')
+        for (const r of o.addedNodes)
+          r.tagName === 'LINK' && r.rel === 'modulepreload' && a(r);
   }).observe(document, { childList: !0, subtree: !0 });
-  function n(o) {
-    const a = {};
+  function n(s) {
+    const o = {};
     return (
-      o.integrity && (a.integrity = o.integrity),
-      o.referrerPolicy && (a.referrerPolicy = o.referrerPolicy),
-      o.crossOrigin === 'use-credentials'
-        ? (a.credentials = 'include')
-        : o.crossOrigin === 'anonymous'
-        ? (a.credentials = 'omit')
-        : (a.credentials = 'same-origin'),
-      a
+      s.integrity && (o.integrity = s.integrity),
+      s.referrerPolicy && (o.referrerPolicy = s.referrerPolicy),
+      s.crossOrigin === 'use-credentials'
+        ? (o.credentials = 'include')
+        : s.crossOrigin === 'anonymous'
+        ? (o.credentials = 'omit')
+        : (o.credentials = 'same-origin'),
+      o
     );
   }
-  function s(o) {
-    if (o.ep) return;
-    o.ep = !0;
-    const a = n(o);
-    fetch(o.href, a);
+  function a(s) {
+    if (s.ep) return;
+    s.ep = !0;
+    const o = n(s);
+    fetch(s.href, o);
   }
 })();
 const F = [
@@ -212,13 +212,13 @@ const F = [
     SECONDARY_OUT: 'secondaryAnimationOut',
     DEFAULT_IN: 'defaultAnimationIn',
   },
-  A = { PRIMARY: 'primary', SECONDARY: 'secondary' },
+  E = { PRIMARY: 'primary', SECONDARY: 'secondary' },
   m = {
     PRIMARY: 'primary-bg',
     SECONDARY: 'secondary-bg',
     DEFAULT: 'default-bg',
   },
-  g = { PRIMARY: '1', SECONDARY: '2', DEFAULT: '0' },
+  v = { PRIMARY: '1', SECONDARY: '2', DEFAULT: '0' },
   j = 3500,
   q = 0,
   Y = 500,
@@ -232,24 +232,24 @@ const F = [
   N = (e, t) => (!e || !t ? !1 : e.classList.contains(t)),
   h = (e, t) => t.forEach((n) => e.classList.add(n)),
   B = (e, t) => Math.floor(Math.random() * (t - e + 1) + e),
-  I = () => `${B(q, Y)}ms`;
-let i = document.querySelector('#image-container');
+  y = () => `${B(q, Y)}ms`;
+let d = document.querySelector('#image-container');
 const W = '00000000000000000000000000',
-  S = '000000',
+  M = '000000',
   z = '0000000000000000000000000000000',
-  w = [3, 4];
-let d = [],
-  l = 0,
-  y = !1,
-  E = [],
-  R = !1,
-  v = F;
-const k = v.map((e) => ({ ...e, value: e.value.map((t) => S + t + S) })),
-  Z = v.map((e) => ({ ...e, value: e.value.map((t) => z + t) })),
-  K = v.map((e) => ({ ...e, value: e.value.map((t) => W + t) })),
-  L = () =>
+  R = [3, 4];
+let l = [],
+  c = 0,
+  L = !1,
+  A = [],
+  w = !1,
+  f = F;
+const k = f.map((e) => ({ ...e, value: e.value.map((t) => M + t + M) })),
+  Z = f.map((e) => ({ ...e, value: e.value.map((t) => z + t) })),
+  K = f.map((e) => ({ ...e, value: e.value.map((t) => W + t) })),
+  I = () =>
     window.innerWidth <= p.SM
-      ? v
+      ? f
       : window.innerWidth >= p.SM && window.innerWidth <= p.MD
       ? k
       : window.innerWidth >= p.MD && window.innerWidth <= p.MD2
@@ -258,24 +258,24 @@ const k = v.map((e) => ({ ...e, value: e.value.map((t) => S + t + S) })),
   G = (e) => {
     x(e),
       _(e),
-      v.forEach((t, n) => {
+      f.forEach((t, n) => {
         e.classList.remove(String(n));
       });
   },
   V = (e) => {
     switch (e) {
-      case A.PRIMARY:
+      case E.PRIMARY:
         return [m.PRIMARY, u.PRIMARY_OUT];
-      case A.SECONDARY:
+      case E.SECONDARY:
         return [m.SECONDARY, u.SECONDARY_OUT];
       default:
         return null;
     }
   },
-  M = (e, t) => {
+  D = (e, t) => {
     x(e), _(e);
     const n = V(t);
-    n && ((e.style.animationDelay = I()), h(e, n));
+    n && ((e.style.animationDelay = y()), h(e, n));
   },
   P = (e, t) => {
     if (!e || !t) {
@@ -283,161 +283,147 @@ const k = v.map((e) => ({ ...e, value: e.value.map((t) => S + t + S) })),
       return;
     }
     e.forEach((n) => {
-      const s = document.createElement('div');
-      h(s, ['row']),
-        n.split('').map((o) => {
-          const a = document.createElement('div'),
+      const a = document.createElement('div');
+      h(a, ['row']),
+        n.split('').map((s) => {
+          const o = document.createElement('div'),
             r = document.createElement('div');
-          switch ((h(a, ['dot', o]), (a.style.animationDelay = I()), o)) {
-            case g.PRIMARY:
-              d = [m.DEFAULT, u.PRIMARY_IN];
+          switch ((h(o, ['dot', s]), (o.style.animationDelay = y()), s)) {
+            case v.PRIMARY:
+              l = [m.DEFAULT, u.PRIMARY_IN];
               break;
-            case g.SECONDARY:
-              d = [m.DEFAULT, u.SECONDARY_IN];
+            case v.SECONDARY:
+              l = [m.DEFAULT, u.SECONDARY_IN];
               break;
             default:
-              d = [m.DEFAULT, u.DEFAULT_IN];
+              l = [m.DEFAULT, u.DEFAULT_IN];
               break;
           }
-          h(r, d), a.append(r), s.append(a);
+          h(r, l), o.append(r), a.append(o);
         }),
-        t.append(s);
+        t.append(a);
     }),
-      (E = document.querySelectorAll('.dot'));
+      (A = document.querySelectorAll('.dot'));
   },
-  H = (e) => {
-    if (y) return null;
-    w.includes(l) && !R && (l = 0);
-    const t = L();
+  b = (e) => {
+    if (L) return null;
+    R.includes(c) && !w && (c = 0);
+    const t = I();
     let n = [];
-    const s = e || t[l].value;
-    E = document.querySelectorAll('.dot');
-    const o = s.reduce((r, f) => (r += f.length), 0);
+    const a = e || t[c].value;
+    A = document.querySelectorAll('.dot');
+    const s = a.reduce((r, g) => (r += g.length), 0);
     if (
-      (s.forEach((r) => n.push(...r)),
-      E.length !== o ||
-        (n.forEach((r, f) => {
-          const c = E[f].getElementsByTagName('div')[0];
-          N(c, g.PRIMARY) && M(c, A.PRIMARY),
-            N(c, g.SECONDARY) && M(c, A.SECONDARY);
+      (a.forEach((r) => n.push(...r)),
+      A.length !== s ||
+        (n.forEach((r, g) => {
+          const i = A[g].getElementsByTagName('div')[0];
+          N(i, v.PRIMARY) && D(i, E.PRIMARY),
+            N(i, v.SECONDARY) && D(i, E.SECONDARY);
         }),
-        y))
+        L))
     )
       return null;
-    const a = setTimeout(() => {
-      n.forEach((r, f) => {
-        const c = E[f].getElementsByTagName('div')[0];
-        switch (((c.style.animationDelay = I()), G(c), r)) {
-          case g.PRIMARY:
-            (d = [m.DEFAULT, u.PRIMARY_IN]), h(c, d);
+    const o = setTimeout(() => {
+      n.forEach((r, g) => {
+        const i = A[g].getElementsByTagName('div')[0];
+        switch (((i.style.animationDelay = y()), G(i), r)) {
+          case v.PRIMARY:
+            (l = [m.DEFAULT, u.PRIMARY_IN]), h(i, l);
             break;
-          case g.SECONDARY:
-            (d = [m.DEFAULT, u.SECONDARY_IN]), h(c, d);
+          case v.SECONDARY:
+            (l = [m.DEFAULT, u.SECONDARY_IN]), h(i, l);
             break;
           default:
-            (d = [m.DEFAULT, u.DEFAULT_IN]), h(c, d);
+            (l = [m.DEFAULT, u.DEFAULT_IN]), h(i, l);
         }
-        c.classList.add(r);
+        i.classList.add(r);
       });
     }, Y);
-    return Q(), l < v.length - 1 ? l++ : (l = 0), () => clearTimeout(a);
+    return Q(), c < f.length - 1 ? c++ : (c = 0), () => clearTimeout(o);
   },
-  D = (e) => {
+  S = (e) => {
     const t = e.target,
       n = Number(t == null ? void 0 : t.getAttribute('data-image-index'));
-    (l = n), (R = w.includes(n));
-    const s = L();
-    H(s[l].value), (y = !0);
+    (c = n), (w = R.includes(n));
+    const a = I();
+    b(a[c].value), (L = !0);
   },
   O = () => {
-    (y = !1), (R = !1);
+    (L = !1), (w = !1);
   },
   $ = () => {
     const e = document.querySelectorAll('.hero-js-button');
     if (e != null && e.length)
       return (
         e.forEach((t) => {
-          t == null || t.addEventListener('mouseenter', (n) => D(n)),
+          t == null || t.addEventListener('mouseenter', (n) => S(n)),
             t == null || t.addEventListener('mouseleave', O);
         }),
         () => {
           e.forEach((t) => {
-            t == null || t.removeEventListener('mouseenter', (n) => D(n)),
+            t == null || t.removeEventListener('mouseenter', (n) => S(n)),
               t == null || t.removeEventListener('mouseleave', O);
           });
         }
       );
   },
   J = (e) => {
-    const t = e || i;
-    if (!t || i) return;
+    const t = e || d;
+    if (!t || d) return;
     t.innerHTML = '';
-    const n = L();
-    P(n[l].value, t), $();
-    const s = setInterval(() => H(), j);
+    const n = I();
+    P(n[c].value, t), $();
+    const a = setInterval(() => b(), j);
     return (
-      i || (i = document.querySelector('#image-container')),
-      () => clearInterval(s)
+      d || (d = document.querySelector('#image-container')),
+      () => clearInterval(a)
     );
   },
   X = () => {
-    const e = L();
-    i && ((i.innerHTML = ''), P(e[l].value, i));
+    const e = I();
+    d && ((d.innerHTML = ''), P(e[c].value, d));
   },
-  b = () => {
-    var n, s;
+  H = () => {
+    var t;
     let e =
-        (n = i == null ? void 0 : i.getBoundingClientRect()) == null
-          ? void 0
-          : n.width,
-      t =
-        (s = i == null ? void 0 : i.getBoundingClientRect()) == null
-          ? void 0
-          : s.height;
+      (t = d == null ? void 0 : d.getBoundingClientRect()) == null
+        ? void 0
+        : t.width;
     document.documentElement.style.setProperty(
       '--image-container-width',
       String(e) + 'px'
     ),
-      t &&
-        window.innerWidth >= 1360 &&
-        (document.documentElement.style.setProperty(
-          '--hero-height',
-          String(t + 106) + 'px'
-        ),
-        document.documentElement.style.setProperty(
-          '--image-container-width',
-          String(e && e / 1.1) + 'px'
-        )),
       X();
   },
   Q = () => {
-    const e = document.querySelector(`[data-image-index="${l}"]`);
-    document.querySelectorAll('.hero-js-button').forEach((s) => {
-      s.classList.remove('hero-js-copy-highlighted');
+    const e = document.querySelector(`[data-image-index="${c}"]`);
+    document.querySelectorAll('.hero-js-button').forEach((a) => {
+      a.classList.remove('hero-js-copy-highlighted');
     });
     const n = e == null ? void 0 : e.getAttribute('data-image-index');
     n &&
-      (w.includes(Number(n)) ||
+      (R.includes(Number(n)) ||
         e == null ||
         e.classList.add('hero-js-copy-highlighted'));
   },
-  T = e0(() => b(), 70);
+  C = e0(() => H(), 70);
 window.addEventListener(
   'load',
   () => (
-    b(),
-    window.addEventListener('resize', T),
+    H(),
+    window.addEventListener('resize', C),
     () => {
-      window.removeEventListener('resize', T);
+      window.removeEventListener('resize', C);
     }
   )
 );
 function e0(e, t = 100) {
   var n;
-  return (...s) => {
+  return (...a) => {
     clearTimeout(n),
       (n = setTimeout(() => {
-        e(...s);
+        e(...a);
       }, t));
   };
 }
@@ -527,5 +513,5 @@ document.querySelector('#js-hero-section').innerHTML = `
     </div>
   </section>
 `;
-const C = document.querySelector('#image-container');
-C && J(C);
+const T = document.querySelector('#image-container');
+T && J(T);
