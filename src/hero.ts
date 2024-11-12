@@ -314,11 +314,24 @@ const renderResizedImage = () => {
 
 const handleWindowResize = () => {
   let imgContainerWidth = imageContainer?.getBoundingClientRect()?.width;
+  let heroSectionHeight = imageContainer?.getBoundingClientRect()?.height;
 
   document.documentElement.style.setProperty(
     '--image-container-width',
     String(imgContainerWidth) + 'px'
   );
+
+  if (!!heroSectionHeight && window.innerWidth >= 1360) {
+    document.documentElement.style.setProperty(
+      '--hero-height',
+      String(heroSectionHeight + 106) + 'px'
+    );
+
+    document.documentElement.style.setProperty(
+      '--image-container-width',
+      String(imgContainerWidth && imgContainerWidth / 1.1) + 'px'
+    );
+  }
 
   renderResizedImage();
 };
@@ -345,10 +358,22 @@ const handleHeroCopyHighlight = () => {
   }
 };
 
+const debouncedResizehandler = debounce(() => handleWindowResize(), 70);
+
 window.addEventListener('load', () => {
   handleWindowResize();
-  window.addEventListener('resize', () => handleWindowResize());
+  window.addEventListener('resize', debouncedResizehandler);
   return () => {
-    window.removeEventListener('resize', () => handleWindowResize());
+    window.removeEventListener('resize', debouncedResizehandler);
   };
 });
+
+function debounce(callback: any, delay: number = 100) {
+  var time: ReturnType<typeof setTimeout>;
+  return (...args: any) => {
+    clearTimeout(time);
+    time = setTimeout(() => {
+      callback(...args);
+    }, delay);
+  };
+}
