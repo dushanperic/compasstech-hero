@@ -97,6 +97,9 @@
 .default-bg {
   background-color: #3b3d3d;
 }
+.sm-visible {
+  display: none;
+}
 .row {
   width: 100%;
   display: flex;
@@ -381,6 +384,7 @@
   .hero-upper-content {
     position: relative;
     margin-left: 7.7%;
+    margin-top: 5vh;
     max-width: 520px;
   }
   .hero-lower-content {
@@ -422,5 +426,22 @@
   }
   .hero-js-copy:hover {
     font-weight: 700;
+  }
+  .sm-visible {
+    display: block;
+  }
+  .desktop-content {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: calc(3.5% + 53px);
+  }
+  .lg-hidden {
+    display: none;
+  }
+}
+@media only screen and (min-width: 1900px) {
+  .hero-upper-content {
+    margin-top: 15vh;
   }
 }

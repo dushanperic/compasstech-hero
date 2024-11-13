@@ -22,7 +22,7 @@ let imageContainer = document.querySelector<HTMLDivElement>('#image-container');
 const staticDotsLargeScreen = '00000000000000000000000000';
 const staticDotsMediumScreen = '000000';
 const staticDotsMediumHorizontalScreen = '0000000000000000000000000000000';
-const excludedFromLoopImagesIndexes = [3, 4];
+const excludedFromLoopImagesIndexes = [3, 4, 0o3, 0o4];
 let classList: string[] = [];
 let currentImageIndex = 0;
 let isPaused = false;
@@ -340,6 +340,10 @@ const handleHeroCopyHighlight = () => {
   const currentHighlightedButton = document.querySelector<HTMLButtonElement>(
     `[data-image-index="${currentImageIndex}"]`
   );
+  const currentHighlightedButtonCopy =
+    document.querySelector<HTMLButtonElement>(
+      `[data-image-index="0o${currentImageIndex}"]`
+    );
 
   const jsButtons =
     document.querySelectorAll<HTMLButtonElement>('.hero-js-button');
@@ -351,9 +355,18 @@ const handleHeroCopyHighlight = () => {
   const buttonIndex =
     currentHighlightedButton?.getAttribute('data-image-index');
 
+  const buttonIndexCopy =
+    currentHighlightedButtonCopy?.getAttribute('data-image-index');
+
   if (buttonIndex) {
     if (!excludedFromLoopImagesIndexes.includes(Number(buttonIndex))) {
       currentHighlightedButton?.classList.add('hero-js-copy-highlighted');
+    }
+  }
+
+  if (buttonIndexCopy) {
+    if (!excludedFromLoopImagesIndexes.includes(Number(buttonIndexCopy))) {
+      currentHighlightedButtonCopy?.classList.add('hero-js-copy-highlighted');
     }
   }
 };

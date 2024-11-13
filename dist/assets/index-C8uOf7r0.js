@@ -5,8 +5,8 @@
   new MutationObserver((o) => {
     for (const a of o)
       if (a.type === 'childList')
-        for (const r of a.addedNodes)
-          r.tagName === 'LINK' && r.rel === 'modulepreload' && s(r);
+        for (const i of a.addedNodes)
+          i.tagName === 'LINK' && i.rel === 'modulepreload' && s(i);
   }).observe(document, { childList: !0, subtree: !0 });
   function n(o) {
     const a = {};
@@ -212,72 +212,72 @@ const F = [
     SECONDARY_OUT: 'secondaryAnimationOut',
     DEFAULT_IN: 'defaultAnimationIn',
   },
-  A = { PRIMARY: 'primary', SECONDARY: 'secondary' },
+  w = { PRIMARY: 'primary', SECONDARY: 'secondary' },
   m = {
     PRIMARY: 'primary-bg',
     SECONDARY: 'secondary-bg',
     DEFAULT: 'default-bg',
   },
-  g = { PRIMARY: '1', SECONDARY: '2', DEFAULT: '0' },
-  j = 3500,
+  v = { PRIMARY: '1', SECONDARY: '2', DEFAULT: '0' },
+  U = 3500,
   q = 0,
-  Y = 500,
-  p = { SM: 768, MD: 1024, MD2: 1366, LG: 1440 },
-  x = (e) => {
+  O = 500,
+  f = { SM: 768, MD: 1024, MD2: 1366, LG: 1440 },
+  T = (e) => {
     Object.values(u).forEach((t) => e.classList.remove(t));
   },
-  _ = (e) => {
+  Y = (e) => {
     Object.values(m).forEach((t) => e.classList.remove(t));
   },
-  N = (e, t) => (!e || !t ? !1 : e.classList.contains(t)),
+  M = (e, t) => (!e || !t ? !1 : e.classList.contains(t)),
   h = (e, t) => t.forEach((n) => e.classList.add(n)),
   B = (e, t) => Math.floor(Math.random() * (t - e + 1) + e),
-  I = () => `${B(q, Y)}ms`;
-let i = document.querySelector('#image-container');
+  I = () => `${B(q, O)}ms`;
+let r = document.querySelector('#image-container');
 const W = '00000000000000000000000000',
-  S = '000000',
-  z = '0000000000000000000000000000000',
-  w = [3, 4];
+  N = '000000',
+  k = '0000000000000000000000000000000',
+  A = [3, 4, 3, 4];
 let d = [],
   l = 0,
   L = !1,
   E = [],
   R = !1,
-  v = F;
-const k = v.map((e) => ({ ...e, value: e.value.map((t) => S + t + S) })),
-  Z = v.map((e) => ({ ...e, value: e.value.map((t) => z + t) })),
-  K = v.map((e) => ({ ...e, value: e.value.map((t) => W + t) })),
+  g = F;
+const Z = g.map((e) => ({ ...e, value: e.value.map((t) => N + t + N) })),
+  z = g.map((e) => ({ ...e, value: e.value.map((t) => k + t) })),
+  G = g.map((e) => ({ ...e, value: e.value.map((t) => W + t) })),
   y = () =>
-    window.innerWidth <= p.SM
-      ? v
-      : window.innerWidth >= p.SM && window.innerWidth <= p.MD
-      ? k
-      : window.innerWidth >= p.MD && window.innerWidth <= p.MD2
+    window.innerWidth <= f.SM
+      ? g
+      : window.innerWidth >= f.SM && window.innerWidth <= f.MD
       ? Z
-      : K,
-  G = (e) => {
-    x(e),
-      _(e),
-      v.forEach((t, n) => {
+      : window.innerWidth >= f.MD && window.innerWidth <= f.MD2
+      ? z
+      : G,
+  K = (e) => {
+    T(e),
+      Y(e),
+      g.forEach((t, n) => {
         e.classList.remove(String(n));
       });
   },
-  V = (e) => {
+  $ = (e) => {
     switch (e) {
-      case A.PRIMARY:
+      case w.PRIMARY:
         return [m.PRIMARY, u.PRIMARY_OUT];
-      case A.SECONDARY:
+      case w.SECONDARY:
         return [m.SECONDARY, u.SECONDARY_OUT];
       default:
         return null;
     }
   },
-  M = (e, t) => {
-    x(e), _(e);
-    const n = V(t);
+  S = (e, t) => {
+    T(e), Y(e);
+    const n = $(t);
     n && ((e.style.animationDelay = I()), h(e, n));
   },
-  P = (e, t) => {
+  H = (e, t) => {
     if (!e || !t) {
       console.error('No image container provided', { container: t, img: e });
       return;
@@ -287,111 +287,111 @@ const k = v.map((e) => ({ ...e, value: e.value.map((t) => S + t + S) })),
       h(s, ['row']),
         n.split('').map((o) => {
           const a = document.createElement('div'),
-            r = document.createElement('div');
+            i = document.createElement('div');
           switch ((h(a, ['dot', o]), (a.style.animationDelay = I()), o)) {
-            case g.PRIMARY:
+            case v.PRIMARY:
               d = [m.DEFAULT, u.PRIMARY_IN];
               break;
-            case g.SECONDARY:
+            case v.SECONDARY:
               d = [m.DEFAULT, u.SECONDARY_IN];
               break;
             default:
               d = [m.DEFAULT, u.DEFAULT_IN];
               break;
           }
-          h(r, d), a.append(r), s.append(a);
+          h(i, d), a.append(i), s.append(a);
         }),
         t.append(s);
     }),
       (E = document.querySelectorAll('.dot'));
   },
-  H = (e) => {
+  _ = (e) => {
     if (L) return null;
-    w.includes(l) && !R && (l = 0);
+    A.includes(l) && !R && (l = 0);
     const t = y();
     let n = [];
     const s = e || t[l].value;
     E = document.querySelectorAll('.dot');
-    const o = s.reduce((r, f) => (r += f.length), 0);
+    const o = s.reduce((i, p) => (i += p.length), 0);
     if (
-      (s.forEach((r) => n.push(...r)),
+      (s.forEach((i) => n.push(...i)),
       E.length !== o ||
-        (n.forEach((r, f) => {
-          const c = E[f].getElementsByTagName('div')[0];
-          N(c, g.PRIMARY) && M(c, A.PRIMARY),
-            N(c, g.SECONDARY) && M(c, A.SECONDARY);
+        (n.forEach((i, p) => {
+          const c = E[p].getElementsByTagName('div')[0];
+          M(c, v.PRIMARY) && S(c, w.PRIMARY),
+            M(c, v.SECONDARY) && S(c, w.SECONDARY);
         }),
         L))
     )
       return null;
     const a = setTimeout(() => {
-      n.forEach((r, f) => {
-        const c = E[f].getElementsByTagName('div')[0];
-        switch (((c.style.animationDelay = I()), G(c), r)) {
-          case g.PRIMARY:
+      n.forEach((i, p) => {
+        const c = E[p].getElementsByTagName('div')[0];
+        switch (((c.style.animationDelay = I()), K(c), i)) {
+          case v.PRIMARY:
             (d = [m.DEFAULT, u.PRIMARY_IN]), h(c, d);
             break;
-          case g.SECONDARY:
+          case v.SECONDARY:
             (d = [m.DEFAULT, u.SECONDARY_IN]), h(c, d);
             break;
           default:
             (d = [m.DEFAULT, u.DEFAULT_IN]), h(c, d);
         }
-        c.classList.add(r);
+        c.classList.add(i);
       });
-    }, Y);
-    return Q(), l < v.length - 1 ? l++ : (l = 0), () => clearTimeout(a);
+    }, O);
+    return Q(), l < g.length - 1 ? l++ : (l = 0), () => clearTimeout(a);
   },
-  D = (e) => {
+  x = (e) => {
     const t = e.target,
       n = Number(t == null ? void 0 : t.getAttribute('data-image-index'));
-    (l = n), (R = w.includes(n));
+    (l = n), (R = A.includes(n));
     const s = y();
-    H(s[l].value), (L = !0);
+    _(s[l].value), (L = !0);
   },
-  O = () => {
+  D = () => {
     (L = !1), (R = !1);
   },
-  $ = () => {
+  V = () => {
     const e = document.querySelectorAll('.hero-js-button');
     if (e != null && e.length)
       return (
         e.forEach((t) => {
-          t == null || t.addEventListener('mouseenter', (n) => D(n)),
-            t == null || t.addEventListener('mouseleave', O);
+          t == null || t.addEventListener('mouseenter', (n) => x(n)),
+            t == null || t.addEventListener('mouseleave', D);
         }),
         () => {
           e.forEach((t) => {
-            t == null || t.removeEventListener('mouseenter', (n) => D(n)),
-              t == null || t.removeEventListener('mouseleave', O);
+            t == null || t.removeEventListener('mouseenter', (n) => x(n)),
+              t == null || t.removeEventListener('mouseleave', D);
           });
         }
       );
   },
   J = (e) => {
-    const t = e || i;
-    if (!t || i) return;
+    const t = e || r;
+    if (!t || r) return;
     t.innerHTML = '';
     const n = y();
-    P(n[l].value, t), $();
-    const s = setInterval(() => H(), j);
+    H(n[l].value, t), V();
+    const s = setInterval(() => _(), U);
     return (
-      i || (i = document.querySelector('#image-container')),
+      r || (r = document.querySelector('#image-container')),
       () => clearInterval(s)
     );
   },
   X = () => {
     const e = y();
-    i && ((i.innerHTML = ''), P(e[l].value, i));
+    r && ((r.innerHTML = ''), H(e[l].value, r));
   },
-  b = () => {
+  P = () => {
     var n, s;
     let e =
-        (n = i == null ? void 0 : i.getBoundingClientRect()) == null
+        (n = r == null ? void 0 : r.getBoundingClientRect()) == null
           ? void 0
           : n.width,
       t =
-        (s = i == null ? void 0 : i.getBoundingClientRect()) == null
+        (s = r == null ? void 0 : r.getBoundingClientRect()) == null
           ? void 0
           : s.height;
     document.documentElement.style.setProperty(
@@ -407,24 +407,30 @@ const k = v.map((e) => ({ ...e, value: e.value.map((t) => S + t + S) })),
       X();
   },
   Q = () => {
-    const e = document.querySelector(`[data-image-index="${l}"]`);
-    document.querySelectorAll('.hero-js-button').forEach((s) => {
-      s.classList.remove('hero-js-copy-highlighted');
+    const e = document.querySelector(`[data-image-index="${l}"]`),
+      t = document.querySelector(`[data-image-index="0o${l}"]`);
+    document.querySelectorAll('.hero-js-button').forEach((a) => {
+      a.classList.remove('hero-js-copy-highlighted');
     });
-    const n = e == null ? void 0 : e.getAttribute('data-image-index');
-    n &&
-      (w.includes(Number(n)) ||
+    const s = e == null ? void 0 : e.getAttribute('data-image-index'),
+      o = t == null ? void 0 : t.getAttribute('data-image-index');
+    s &&
+      (A.includes(Number(s)) ||
         e == null ||
-        e.classList.add('hero-js-copy-highlighted'));
+        e.classList.add('hero-js-copy-highlighted')),
+      o &&
+        (A.includes(Number(o)) ||
+          t == null ||
+          t.classList.add('hero-js-copy-highlighted'));
   },
-  T = e0(() => b(), 70);
+  b = e0(() => P(), 70);
 window.addEventListener(
   'load',
   () => (
-    b(),
-    window.addEventListener('resize', T),
+    P(),
+    window.addEventListener('resize', b),
     () => {
-      window.removeEventListener('resize', T);
+      window.removeEventListener('resize', b);
     }
   )
 );
@@ -440,14 +446,14 @@ function e0(e, t = 100) {
 document.querySelector('#js-hero-section').innerHTML = `
   <section class="hero-section">
     <div class="hero-inner-container">
-      <div class="hero-upper-content">
+      <div class="hero-upper-content lg-hidden">
         <h2 class="hero-title">
           Transforming Stamp Duty: From Complex to Clear
         </h2>
         <p class="hero-subtitle">Calculate your stamp duty today!</p>
       </div>
       <div id="image-container" class="image-container"></div>
-      <div class="hero-lower-content">
+      <div class="hero-lower-content lg-hidden">
         <div class="hero-flex">
           <a
             href="https://www.compass.tech/get-a-quote"
@@ -520,6 +526,84 @@ document.querySelector('#js-hero-section').innerHTML = `
           </button>
         </div>
       </div>
+    </div>
+
+    <div class="sm-visible desktop-content">
+      <h2 class="hero-title">
+        Transforming Stamp Duty: From Complex to Clear
+      </h2>
+      <p class="hero-subtitle">Calculate your stamp duty today!</p>
+      <div class="hero-flex">
+          <a
+            href="https://www.compass.tech/get-a-quote"
+            target="_blank"
+            class="hero-button hero-button-secondary hero-js-button"
+            data-image-index="0o3"
+          >
+            Get a quote
+          </a>
+
+          <a
+            href="https://www.compass.tech/solutions-residential-conveyancing"
+            class="hero-button hero-js-button"
+            data-image-index="0o4"
+          >
+            Discover more
+          </a>
+        </div>
+        <div>
+          <button class="hero-js-button hero-js-copy" data-image-index="0o0">
+            <svg
+              width="15"
+              height="18"
+              viewBox="0 0 15 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M6.54781 0H0.699615L8.45224 9H8.45103L0.699224 18H6.5466L14.2992 9H14.2996L6.54781 0Z"
+                fill="#E7ECEA"
+              />
+            </svg>
+            <span>Satisfy your self-assessment obligation to HMRC</span>
+          </button>
+          <button class="hero-js-button hero-js-copy" data-image-index="0o1">
+            <svg
+              width="15"
+              height="18"
+              viewBox="0 0 15 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M6.54781 0H0.699615L8.45224 9H8.45103L0.699224 18H6.5466L14.2992 9H14.2996L6.54781 0Z"
+                fill="#E7ECEA"
+              />
+            </svg>
+            <span>Potential to save money on tax</span>
+          </button>
+          <button class="hero-js-button hero-js-copy" data-image-index="0o2">
+            <svg
+              width="15"
+              height="18"
+              viewBox="0 0 15 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M6.54781 0H0.699615L8.45224 9H8.45103L0.699224 18H6.5466L14.2992 9H14.2996L6.54781 0Z"
+                fill="#E7ECEA"
+              />
+            </svg>
+            <span>No risk of further tax implications</span>
+          </button>
+        </div>
     </div>
   </section>
 `;
