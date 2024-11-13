@@ -348,7 +348,7 @@
   .hero-title {
     font-size: 39px;
     line-height: 42px;
-    max-width: 605px;
+    max-width: 500px;
     padding-left: 0px;
     padding-right: 0px;
     position: relative;
@@ -517,7 +517,7 @@
   }
 
   .hero-js-copy {
-    font-size: 25px;
+    font-size: 22px;
     line-height: 29px;
     margin-bottom: 25px;
     padding-left: 0;
