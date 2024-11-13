@@ -16,11 +16,6 @@
   --hero-height: auto;
 }
 
-body {
-  padding: 0;
-  margin: 0;
-}
-
 .image-container {
   box-sizing: border-box;
   display: block;
@@ -173,7 +168,7 @@ body {
   overflow: hidden;
   position: relative;
   background-color: #414343;
-  padding: 55px 16px;
+  padding: 25px 16px;
   /* height: calc(100vh - 3rem);
   min-height: calc(100vh - 3rem); */
 }
@@ -188,8 +183,8 @@ body {
 
 .hero-title {
   box-sizing: border-box;
-  font-size: 32px;
-  line-height: 38px;
+  font-size: 26px;
+  line-height: 30px;
   text-align: left;
   font-weight: bold;
   margin: 0;
@@ -224,7 +219,7 @@ body {
   color: #e7ecea;
   background-color: transparent;
   border: none;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 32px;
   font-weight: 400;
   display: flex;
@@ -456,7 +451,8 @@ body {
     padding-top: 53px;
     padding-bottom: 53px;
     position: relative;
-    height: var(--hero-height);
+    min-height: 100vh;
+    /* height: var(--hero-height); */
   }
 
   .hero-inner-container {

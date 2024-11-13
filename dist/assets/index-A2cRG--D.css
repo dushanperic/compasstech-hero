@@ -142,7 +142,7 @@
   overflow: hidden;
   position: relative;
   background-color: #414343;
-  padding: 55px 16px;
+  padding: 25px 16px;
 }
 .hero-section-container {
   box-sizing: border-box;
@@ -151,8 +151,8 @@
 }
 .hero-title {
   box-sizing: border-box;
-  font-size: 32px;
-  line-height: 38px;
+  font-size: 26px;
+  line-height: 30px;
   text-align: left;
   font-weight: 700;
   margin: 0 0 12px;
@@ -181,7 +181,7 @@
   color: #e7ecea;
   background-color: transparent;
   border: none;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 32px;
   font-weight: 400;
   display: flex;
@@ -369,7 +369,7 @@
   .hero-section {
     padding: 53px;
     position: relative;
-    /* height: var(--hero-height); */
+    min-height: 100vh;
   }
   .hero-inner-container {
     display: flex;
