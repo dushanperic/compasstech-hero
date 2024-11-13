@@ -444,7 +444,7 @@
     display: none;
   }
 }
-@media only screen and (min-width: 1900px) {
+@media only screen and (min-width: 2560px) {
   .hero-upper-content {
     margin-top: 15vh;
   }
