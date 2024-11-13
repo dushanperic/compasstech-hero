@@ -276,6 +276,10 @@
     outline: none;
     transition: all 0.2s ease-in;
   }
+  .hero-section {
+    min-height: 100vh;
+    padding: 25px 50px;
+  }
   .hero-section-container {
     display: flex;
     flex-direction: column;
@@ -285,13 +289,13 @@
   .hero-title {
     font-size: 39px;
     line-height: 42px;
-    max-width: 500px;
+    max-width: 550px;
     padding-left: 0;
     padding-right: 0;
     position: relative;
     z-index: 100;
     letter-spacing: normal;
-    margin-top: 0;
+    margin-top: 10%;
   }
   .hero-subtitle {
     font-size: 20px;
@@ -372,7 +376,6 @@
   .hero-section {
     padding: 53px;
     position: relative;
-    min-height: 100vh;
   }
   .hero-inner-container {
     display: flex;
@@ -408,6 +411,7 @@
     margin-top: 0;
     margin-bottom: 26px;
     margin-top: 3rem;
+    max-width: 500px;
   }
   .hero-subtitle {
     font-size: 24px;
