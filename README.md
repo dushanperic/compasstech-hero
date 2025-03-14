@@ -17,10 +17,8 @@ This template uses the following dependencies:
 
 ## Development
 
-1. To start development
-
 ```bash
-cd your-project-name
+cd project
 npm install
 ```
 
